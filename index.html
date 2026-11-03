@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="آریو تجارت؛ آموزش کاربردی انبارداری، مذاکره خرده‌فروشی و عمده‌فروشی قطعات یدکی خودرو و حسابداری مقدماتی فروشگاه، همراه با ابزارهای تعاملی و تمرین.">
+<meta name="color-scheme" content="light dark">
+<title>آریو تجارت | از انبار منظم تا مذاکره برنده و حساب پاک</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- ============ نوار بالا ============ -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="باز کردن فهرست" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+
+    <a class="brand" href="#top" aria-label="آریو تجارت، بالای صفحه">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="24" cy="24" r="8" fill="none" stroke="currentColor" stroke-width="3"/><path d="M24 3v7M24 38v7M3 24h7M38 24h7M9.2 9.2l5 5M33.8 33.8l5 5M38.8 9.2l-5 5M14.2 33.8l-5 5" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+      </span>
+      <span class="brand-text"><strong>آریو تجارت</strong><small>دوره کاربردی فروشگاه قطعات یدکی</small></span>
+    </a>
+
+    <nav class="topnav" aria-label="میانبرها">
+      <a href="#module-1">انبار</a>
+      <a href="#module-2">خرده</a>
+      <a href="#module-3">عمده</a>
+      <a href="#module-4">حساب</a>
+    </nav>
+
+    <div class="top-actions">
+      <button class="icon-btn search-btn" id="searchTrigger" aria-label="جستجو در آموزش (Ctrl+K)" title="جستجو (Ctrl+K) — قابل پنهان کردن">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <button class="icon-btn" id="themeBtn" aria-label="تغییر تم روشن و تیره" title="تغییر تم">
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M19.1 4.9l-1.5 1.5M6.4 17.6l-1.5 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="icon-btn" id="printBtn" aria-label="چاپ یا ذخیره PDF" title="چاپ / PDF">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 9V4h10v5M7 18H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M7 15h10v5H7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="17.5" cy="12" r="1" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="overlay" id="overlay" hidden></div>
+
+<div class="layout" id="top">
+
+  <!-- ============ sidebar ============ -->
+  <aside class="sidebar" id="sidebar" aria-label="فهرست فصل‌ها">
+    <div class="side-card progress-card">
+      <div class="ring-wrap">
+        <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="ring-bg" cx="60" cy="60" r="50"/>
+          <circle class="ring-fg" id="ringFg" cx="60" cy="60" r="50"/>
+        </svg>
+        <div class="ring-label"><strong id="progressPercent">۰٪</strong><small>پیشرفت شما</small></div>
+      </div>
+      <p class="side-note" id="progressHint">هر تیک که بزنید، اینجا ذخیره می‌شود. نیازی به ثبت‌نام نیست.</p>
+      <button class="btn btn-ghost btn-sm" id="exportBtn">دانلود خلاصه من</button>
+    </div>
+
+    <div class="resume-chip" id="resumeChip" hidden>
+      <span>📌 محل ذخیره شده</span>
+      <b id="resumeLabel">—</b>
+      <div class="resume-actions">
+        <button class="btn btn-sm btn-outline" id="resumeBtn">ادامه</button>
+        <button class="resume-clear" id="resumeClear" title="فراموش کردن محل مطالعه" aria-label="فراموش کردن محل مطالعه">×</button>
+      </div>
+    </div>
+
+    <nav class="side-nav" aria-label="فصل‌های آموزش">
+      <span class="side-label">مسیر یادگیری</span>
+      <a href="#module-1" class="side-link" data-target="module-1"><i class="dot d1"></i><span><b>۰۱ · انبار منظم</b><small>چیدمان، آدرس، 5S</small></span><em class="mini-bar"><i data-bar="m1"></i></em></a>
+      <a href="#module-2" class="side-link" data-target="module-2"><i class="dot d2"></i><span><b>۰۲ · پشت کانتر</b><small>مذاکره خرده‌فروشی</small></span><em class="mini-bar"><i data-bar="m2"></i></em></a>
+      <a href="#module-3" class="side-link" data-target="module-3"><i class="dot d3"></i><span><b>۰۳ · قرارداد عمده</b><small>مذاکره B2B و شرایط</small></span><em class="mini-bar"><i data-bar="m3"></i></em></a>
+      <a href="#module-4" class="side-link" data-target="module-4"><i class="dot d4"></i><span><b>۰۴ · حساب پاک</b><small>حسابداری مقدماتی</small></span><em class="mini-bar"><i data-bar="m4"></i></em></a>
+      <span class="side-label">ضمائم</span>
+      <a href="#toolkit" class="side-link" data-target="toolkit"><i class="dot d5"></i><span><b>برگه تقلب</b><small>خلاصه یک صفحه‌ای</small></span></a>
+      <a href="#final" class="side-link" data-target="final"><i class="dot d6"></i><span><b>آزمون پایانی</b><small>جمع‌بندی و گواهی</small></span></a>
+    </nav>
+
+    <div class="side-tip">
+      <span class="tip-emoji" aria-hidden="true">💡</span>
+      <p><b>راز این دوره</b><br>قبل از هر مذاکره، یک عدد دقیق داشته باشید: آدرس قطعه، کف قیمت، یا موجودی نقد. عدد، جای حدس را می‌گیرد.</p>
+      <p class="tip-sub">🔍 جستجو فقط با <kbd>Ctrl K</kbd> باز می شود. محل مطالعه و پیشرفتتان هم خودکار ذخیره می شود.</p>
+    </div>
+  </aside>
+
+  <!-- ============ محتوا ============ -->
+  <main class="main">
+
+    <!-- ---------- HERO ---------- -->
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-blob b1" aria-hidden="true"></div>
+      <div class="hero-blob b2" aria-hidden="true"></div>
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-content">
+        <span class="pill pill-warm"><span class="pill-dot"></span> ویژه فروشگاه‌های قطعات یدکی خودرو</span>
+        <h1 id="heroTitle">از <span class="grad">قفسه مرتب</span> تا<br>مذاکره‌ای که <span class="grad">سود می‌سازد</span></h1>
+        <p class="hero-lead">چهار فصل کوتاه، پر از جمله‌های آماده، چک‌لیست و ابزار محاسبه. طوری نوشته شده که فردا صبح، همان لحظه پشت کانتر یا در انبار، بتوانید ازش استفاده کنید.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#module-1">شروع از فصل اول <span aria-hidden="true">←</span></a>
+          <a class="btn btn-outline" href="#toolkit">ببرم سراغ خلاصه</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>۴</strong><span>فصل کاربردی</span></div>
+          <div><strong>۸</strong><span>ابزار تعاملی</span></div>
+          <div><strong>۱۸</strong><span>سؤال تمرینی</span></div>
+          <div><strong>≈۴۵</strong><span>دقیقه مطالعه</span></div>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 420 360" class="art-svg">
+          <defs>
+            <linearGradient id="gA" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0f8b83"/><stop offset="1" stop-color="#31c1ae"/></linearGradient>
+            <linearGradient id="gB" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff9f6b"/><stop offset="1" stop-color="#ffc98a"/></linearGradient>
+            <linearGradient id="gC" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5a6ff0"/><stop offset="1" stop-color="#9aa8ff"/></linearGradient>
+          </defs>
+          <circle cx="210" cy="175" r="158" fill="#fff" opacity=".55"/>
+          <circle cx="210" cy="175" r="158" fill="none" stroke="#0f8b83" stroke-width="2" stroke-dasharray="6 10" opacity=".35"/>
+          <!-- shelf -->
+          <g transform="translate(60 90)">
+            <rect x="0" y="0" width="300" height="196" rx="14" fill="#ffffff" stroke="#0d3b3a" stroke-width="3"/>
+            <path d="M0 65h300M0 130h300" stroke="#0d3b3a" stroke-width="3"/>
+            <rect x="2" y="2" width="296" height="61" rx="10" fill="url(#gA)" opacity=".16"/>
+            <!-- boxes row 1 -->
+            <rect x="18" y="22" width="52" height="41" rx="6" fill="url(#gA)"/>
+            <rect x="82" y="22" width="52" height="41" rx="6" fill="url(#gB)"/>
+            <rect x="146" y="22" width="52" height="41" rx="6" fill="url(#gC)"/>
+            <rect x="210" y="22" width="70" height="41" rx="6" fill="#ffd9a8"/>
+            <path d="M30 42h28M94 42h28M158 42h28M222 42h46" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+            <!-- row 2 -->
+            <rect x="18" y="86" width="70" height="42" rx="6" fill="#ffd9a8"/>
+            <rect x="100" y="86" width="52" height="42" rx="6" fill="url(#gC)"/>
+            <rect x="164" y="86" width="52" height="42" rx="6" fill="url(#gA)"/>
+            <rect x="228" y="86" width="52" height="42" rx="6" fill="url(#gB)"/>
+            <path d="M30 106h46M112 106h28M176 106h28M240 106h28" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+            <!-- row 3 -->
+            <rect x="18" y="151" width="52" height="41" rx="6" fill="url(#gB)"/>
+            <rect x="82" y="151" width="52" height="41" rx="6" fill="url(#gA)"/>
+            <rect x="146" y="151" width="52" height="41" rx="6" fill="#ffd9a8"/>
+            <rect x="210" y="151" width="70" height="41" rx="6" fill="url(#gC)"/>
+            <path d="M30 171h28M94 171h28M158 171h28M222 171h46" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+            <!-- legs -->
+            <path d="M12 196v18M288 196v18" stroke="#0d3b3a" stroke-width="7" stroke-linecap="round"/>
+          </g>
+          <!-- floating tags -->
+          <g transform="translate(24 44) rotate(-8)"><rect width="104" height="34" rx="17" fill="#fff" stroke="#0d3b3a" stroke-width="2.5"/><text x="52" y="22" text-anchor="middle" font-family="Tahoma" font-size="14" fill="#0d3b3a">A-02-R03</text></g>
+          <g transform="translate(292 272) rotate(7)"><rect width="112" height="36" rx="18" fill="#fff" stroke="#0d3b3a" stroke-width="2.5"/><text x="56" y="23" text-anchor="middle" font-family="Tahoma" font-size="14" fill="#0d3b3a">سود ≠ نقد</text></g>
+          <g transform="translate(336 66)"><circle cx="0" cy="0" r="24" fill="url(#gB)"/><path d="M-9 0l6 7 12-14" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+          <g transform="translate(48 300)"><circle cx="0" cy="0" r="18" fill="url(#gC)"/><text x="0" y="6" text-anchor="middle" font-family="Tahoma" font-size="18" fill="#fff">%</text></g>
+          <path d="M360 176l4-10 4 10 10 4-10 4-4 10-4-10-10-4z" fill="#0f8b83"/>
+          <path d="M28 210l3-7 3 7 7 3-7 3-3 7-3-7-7-3z" fill="#ff9f6b"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ---------- مسیر ---------- -->
+    <section class="path-section" aria-label="معرفی چهار فصل">
+      <div class="section-kicker">نقشه راه</div>
+      <h2 class="section-h">چهار مهارت، یک فروشگاه آرام و سودآور</h2>
+      <p class="section-sub">به ترتیب پیش بروید؛ هر فصل، عدد و جمله‌ای به فصل بعدی می‌دهد.</p>
+      <div class="path-grid">
+        <a class="path-card" href="#module-1"><span class="path-n">۰۱</span><span class="path-ic">▤</span><b>انبار، قبل از حرف</b><small>وقتی قطعه پیدا شود، حرفتان سند دارد.</small><em>چیدمان · آدرس · 5S</em></a>
+        <a class="path-card" href="#module-2"><span class="path-n">۰۲</span><span class="path-ic">☺</span><b>پشت کانتر</b><small>اعتماد بسازید، قیمت را آخر بگویید.</small><em>کشف نیاز · ارزش · اعتراض</em></a>
+        <a class="path-card" href="#module-3"><span class="path-n">۰۳</span><span class="path-ic">⇄</span><b>پای میز عمده</b><small>هر امتیازی، عوضی دارد.</small><em>پلکان تخفیف · اعتبار · قرارداد</em></a>
+        <a class="path-card" href="#module-4"><span class="path-n">۰۴</span><span class="path-ic">∑</span><b>دفتر و ترازو</b><small>بدانید سود کجاست و پول کجاست.</small><em>سود ناخالص · نقد · سربه‌سر</em></a>
+      </div>
+      <div class="how-use">
+        <span class="how-badge">چطور استفاده کنیم؟</span>
+        <p>☑ تیک‌های هر فصل را بزنید (ذخیره می‌شود) &nbsp;·&nbsp; 🧮 ابزارها را با عددهای واقعی فروشگاهتان امتحان کنید &nbsp;·&nbsp; 🗣 جمله‌ها را بلند تمرین کنید &nbsp;·&nbsp; 🖨 آخر سر «برگه تقلب» را چاپ کنید و بزنید دیوار انبار &nbsp;·&nbsp; 🔍 جستجو با <kbd>Ctrl K</kbd>.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         فصل ۱
+    ============================================================= -->
+    <section class="module" id="module-1" data-accent="teal" data-module="m1">
+      <header class="module-head">
+        <div class="module-num">۰۱</div>
+        <div class="module-head-text">
+          <span class="eyebrow">فصل اول · زیرساختِ قدرت مذاکره</span>
+          <h2>انبارداری اولیه: چیدمان، آدرس‌دهی و 5S</h2>
+          <p>مذاکره خوب از «داده دقیق» شروع می‌شود، نه از کلمات قوی. اگر ندانید قطعه کجاست، چند تا دارید و سالم است یا نه، نمی‌توانید درباره قیمت، تحویل فوری و گارانتی با اطمینان حرف بزنید.</p>
+        </div>
+        <div class="module-badge"><span>سطح</span><b>مقدماتی</b><span>زمان</span><b>۱۲ دقیقه</b></div>
+      </header>
+
+      <div class="quick-summary">
+        <div class="qs-title"><span aria-hidden="true">⚡</span> چکیده ۶۰ ثانیه‌ای</div>
+        <ul>
+          <li>پرگردش‌ها را در «منطقه طلایی» (بین کمر و شانه، نزدیک کانتر) بگذارید؛ کم‌گردش‌ها بالا و عقب.</li>
+          <li>هر خانه قفسه یک آدرس ثابت و منحصربه‌فرد می‌گیرد: <code>A-02-R03-L2-B07</code>.</li>
+          <li>5S یعنی: جداسازی، نظم، پاکیزگی، استاندارد، انضباط؛ با یک ممیزی ساده ماهانه امتیاز بگیرید.</li>
+          <li>خروجی فصل: <b>زمان پیدا کردن قطعه</b> و <b>اطمینان از موجودی</b>، دو برگ برنده شما سر میز مذاکره است.</li>
+        </ul>
+      </div>
+
+      <h3 class="block-h" id="m1-layout"><span class="h-num">۱</span> چیدمان: جریان را طراحی کنید، نه فقط قفسه را</h3>
+      <p class="lead-p">اول مسیر حرکت کالا را بکشید، بعد قفسه بچینید. یک انبار خوب، خط تولید کوچکی است که ورودی و خروجی‌اش قاطی نمی‌شود.</p>
+      <div class="flow" aria-label="جریان یک طرفه کالا">
+        <span>ورود کالا</span><i>←</i><span>بازرسی و تطبیق کد</span><i>←</i><span>برچسب / آدرس</span><i>←</i><span>قفسه</span><i>←</i><span>پیکینگ</span><i>←</i><span>بسته و فاکتور</span><i>←</i><span>تحویل</span>
+      </div>
+      <div class="cards-grid cols-3">
+        <article class="card">
+          <span class="card-ic">◫</span><h4>منطقه‌بندی ABC</h4>
+          <p>بر اساس <b>تعداد دفعات فروش ۹۰ روز اخیر</b>، نه بر اساس حدس:</p>
+          <ul class="tight"><li><b>A</b> پرگردش (لنت، فیلتر روغن، شمع، تیغه برف‌پاک کن) → نزدیک کانتر، ارتفاع ۷۰–۱۵۰ سانتی</li><li><b>B</b> متوسط → راهروهای میانی</li><li><b>C</b> کندگردش / سفارشی → طبقات بالا و انتها</li></ul>
+          <div class="card-note">هر فصل یک بار ABC را به‌روز کنید؛ جابه‌جایی فصلی، مثلاً فیلتر کابین در بهار یا ضدیخ در پاییز، طبیعی است.</div>
+        </article>
+        <article class="card">
+          <span class="card-ic">⚖</span><h4>منطق فیزیکی</h4>
+          <ul class="tight">
+            <li>سنگین (دیسک، باتری، کیت کلاچ) → طبقه پایین، نزدیک چرخ دستی.</li>
+            <li>کوچک و گران (سنسور، ECU، شیر EGR) → قفسه بسته و قفلدار، نه روی پیشخوان.</li>
+            <li>روغن، اسپری، باتری → جدا، با سینی نشت‌گیر، دور از لنت و کاغذ و منبع حرارت.</li>
+            <li>لاستیکی‌ها (تسمه، گردگیر، لاستیک سیبک) → دور از آفتاب و اوزون موتور الکتریکی.</li>
+          </ul>
+          <div class="card-note">عرض راهرو را طوری بگیرید که چرخ دستی و نفر همزمان رد شوند؛ تنگ کردن راهرو برای «جای بیشتر» معمولاً زمان پیک را دو برابر می‌کند.</div>
+        </article>
+        <article class="card">
+          <span class="card-ic">⏳</span><h4>چرخش و سلامت کالا</h4>
+          <ul class="tight">
+            <li><b>FIFO</b> برای همه؛ <b>FEFO</b> (تاریخ انقضا زودتر اول) برای روغن، ضدیخ، چسب، باتری و قطعات لاستیکی.</li>
+            <li>قرنطینه: یک قفسه/جعبه قرمز برای مرجوعی، معیوب، کد نامطمئن و کالای امانی — هیچوقت قاطی موجودی قابل فروش نشود.</li>
+            <li>روی هر ردیف، «حداقل / حداکثر» بنویسید تا نقطه سفارش از روی چشم معلوم شود.</li>
+          </ul>
+          <div class="card-note">باتری و لاستیکی‌ها را با تاریخ ورود لیبل بزنید؛ خواب طولانی کالا، یعنی سرمایه خوابیده و ریسک گارانتی.</div>
+        </article>
+      </div>
+
+      <div class="tabs" data-tabs>
+        <div class="tab-list" role="tablist" aria-label="جزئیات چیدمان">
+          <button class="tab is-active" data-tab="t1a" role="tab">اشتباه‌های رایج</button>
+          <button class="tab" data-tab="t1b" role="tab">شماره‌هایی که باید بدانید</button>
+          <button class="tab" data-tab="t1c" role="tab">برنامه ۳۰ روزه</button>
+        </div>
+        <div class="tab-panels">
+          <div class="tab-panel is-active" data-panel="t1a">
+            <ul class="danger-list">
+              <li>چیدن بر اساس «شرکت سازنده» به جای گردش کالا؛ نتیجه: پرگردش‌ها ته انبار.</li>
+              <li>چند قطعه مختلف در یک خانه «چون شبیه هم هستند»؛ نتیجه: اشتباه در تحویل و مرجوعی.</li>
+              <li>آدرس فقط در ذهن قدیمی‌ترین فروشنده؛ نتیجه: با رفتن او، انبار قفل می‌شود.</li>
+              <li>انبار کردن کالا قبل از ثبت فاکتور خرید؛ نتیجه: موجودی واقعی با دفتر نمیخواند.</li>
+            </ul>
+          </div>
+          <div class="tab-panel" data-panel="t1b">
+            <div class="kpi-row">
+              <div><b>زمان پیک</b><span>از دریافت فاکتور تا آماده تحویل</span><em>هدف: زیر ۳ دقیقه</em></div>
+              <div><b>دقت آدرس</b><span>تعداد آدرس درست ÷ نمونه شمارش شده</span><em>هدف: ۹۸٪+</em></div>
+              <div><b>دقت موجودی</b><span>تعداد واقعی ÷ تعداد ثبت‌شده سیستم</span><em>هدف: ۹۷٪+</em></div>
+              <div><b>گردش موجودی</b><span>بهای کالای فروش رفته ÷ میانگین موجودی</span><em>هرچه بالاتر، سرمایه زندهتر</em></div>
+            </div>
+            <p class="fine">نیازی به نرم&#8204;افزار گران نیست؛ یک دفتر شمارش چرخشی (روزانه ۱۰ آدرس) هم همین عددها را می‌دهد.</p>
+          </div>
+          <div class="tab-panel" data-panel="t1c">
+            <ol class="steps-list">
+              <li><b>هفته ۱ · جداسازی:</b> همه کالاها بیرون، برچسب قرمز برای «بدون مصرف ۶ ماه / معیوب / نامشخص»، تصمیم: بفروش، برگردان، اسقاط.</li>
+              <li><b>هفته ۲ · آدرس:</b> نامگذاری راهروها و قفسهها، چاپ برچسب، ثبت آدرس تک تک کدفنیها در همان برگهای که قیمت دارید.</li>
+              <li><b>هفته ۳ · جابه جایی ABC:</b> ۲۰ کد پرگردش را به منطقه طلایی بیاورید و زمان پیک قبل/بعد را اندازه بگیرید.</li>
+              <li><b>هفته ۴ · استاندارد:</b> چک لیست opening/closing، مسئول هر راهرو، ممیزی 5S و جلسه ۱۰ دقیقهای جمعهها.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="block-h" id="m1-address"><span class="h-num">۲</span> آدرس دهی: اسم قطعه کافی نیست، نشانیاش را بدهید</h3>
+      <p class="lead-p">«فیلتر پراید اونجا روی طبقه دومه» یک جمله است؛ <code>A-02-R03-L2-B07</code> یک سیستم است. آدرس خوب ۵ ویژگی دارد: <b>یکتا، ثابت، خوانا از روبرو، قابل چاپ به بارکد، و همسان با نرم&#8204;افزار</b>.</p>
+      <div class="split">
+        <div>
+          <div class="code-breakdown">
+            <div><code>A</code><span>منطقه</span><small>A پرگردش · B متوسط · C کندگردش · Q قرنطینه</small></div>
+            <i>–</i>
+            <div><code>02</code><span>راهرو</span><small>شماره ثابت روی سر در راهرو</small></div>
+            <i>–</i>
+            <div><code>R03</code><span>قفسه</span><small>Rack، از چپ به راست</small></div>
+            <i>–</i>
+            <div><code>L2</code><span>طبقه</span><small>از پایین به بالا</small></div>
+            <i>–</i>
+            <div><code>B07</code><span>خانه</span><small>Bin، داخل همان طبقه</small></div>
+          </div>
+          <div class="rules">
+            <h4>پنج قانون طلایی</h4>
+            <ol><li>اعداد را همیشه دو رقمی بنویسید (<code>02</code> نه <code>2</code>) تا مرتبسازی خراب نشود.</li><li>از حروف گیجکننده دوری کنید: <code>O</code> با <code>0</code>، <code>I</code> با <code>1</code>.</li><li>آدرس به <b>جایگاه</b> تعلق دارد، نه به قطعه؛ جابه جایی کالا = بهروزرسانی آدرس.</li><li>هر برچسب: کد فنی + نام کوتاه + آدرس + بارکد/QR + حداقل موجودی.</li><li>هیچ قطعهای بدون آدرس وارد قفسه نشود، حتی «فقط برای امروز».</li></ol>
+          </div>
+        </div>
+        <aside class="soft-panel">
+          <h4>🧰 ابزار ۱ · آدرس ساز</h4>
+          <p class="fine">محل یک قطعه را انتخاب کنید تا کد استاندارد و توضیحش را بگیرید.</p>
+          <div class="field-row" id="addressTool">
+            <label>منطقه<select id="adZone"><option value="A">A · پرگردش</option><option value="B">B · متوسط</option><option value="C">C · کندگردش</option><option value="Q">Q · قرنطینه</option></select></label>
+            <label>راهرو<select id="adAisle"></select></label>
+            <label>قفسه<select id="adRack"></select></label>
+            <label>طبقه<select id="adLevel"></select></label>
+            <label>خانه<select id="adBin"></select></label>
+          </div>
+          <div class="output-box"><small>آدرس شما</small><strong id="addressCode">A-01-R01-L1-B01</strong></div>
+          <p class="fine" id="addressHint"></p>
+          <button class="btn btn-sm btn-outline" data-copy="#addressCode">کپی آدرس</button>
+        </aside>
+      </div>
+
+      <h3 class="block-h" id="m1-5s"><span class="h-num">۳</span> فایو اس: نظمی که با آدمها میماند</h3>
+      <p class="lead-p">5S یک پروژه تمیزکاری نیست؛ یک <b>توافق تیمی</b> است که «جای هر چیز» و «مسئول هر جا» را مشخص می‌کند. اسم ژاپنیاش را با معادل فارسی یاد بگیرید تا بتوانید برای همکارتان توضیحش دهید.</p>
+      <div class="s5-grid">
+        <article><span>۱</span><b>سِیری · Seiri</b><em>جداسازی</em><p>آنچه لازم است بماند، بقیه برچسب قرمز بگیرد. معیار: مصرف در ۹۰ روز گذشته.</p></article>
+        <article><span>۲</span><b>سِیتون · Seiton</b><em>نظم و جایگذاری</em><p>هر چیز جایی دارد و هر جایی چیزی؛ ابزار پرکاربرد در دسترس، با شابلون سایه روی دیوار.</p></article>
+        <article><span>۳</span><b>سِیسو · Seiso</b><em>پاکیزگی</em><p>تمیز کردن یعنی بازرسی: نشتی روغن، زنگ قفسه، برچسب پاره شدن، همه علامتاند.</p></article>
+        <article><span>۴</span><b>سِیکِتسو · Seiketsu</b><em>استانداردسازی</em><p>رنگها، چک لیست، عکس «وضعیت مطلوب» بالای هر راهرو، مسئول مشخص.</p></article>
+        <article><span>۵</span><b>شیتسوکه · Shitsuke</b><em>انضباط و تداوم</em><p>۱۰ دقیقه آخر هر روز + ممیزی ماهانه. بدون این مرحله، چهار تای اول دو هفته دوام میآورند.</p></article>
+      </div>
+      <div class="split">
+        <aside class="soft-panel">
+          <h4>🧰 ابزار ۲ · ممیزی 5S</h4>
+          <p class="fine">به هر S از ۰ تا ۲۰ امتیاز بدهید. ضعف واقعی معمولاً همان جایی است که کمترین نمره را گرفتید.</p>
+          <div class="sliders" id="fiveSTool">
+            <label>جداسازی <output>۱۶</output><input type="range" min="0" max="20" value="16" data-5s="جداسازی"></label>
+            <label>نظم <output>۱۴</output><input type="range" min="0" max="20" value="14" data-5s="نظم"></label>
+            <label>پاکیزگی <output>۱۸</output><input type="range" min="0" max="20" value="18" data-5s="پاکیزگی"></label>
+            <label>استاندارد <output>۱۰</output><input type="range" min="0" max="20" value="10" data-5s="استانداردسازی"></label>
+            <label>انضباط <output>۱۲</output><input type="range" min="0" max="20" value="12" data-5s="انضباط"></label>
+          </div>
+          <div class="output-box"><small>امتیاز کل</small><strong id="fiveSScore">۷۰ / ۱۰۰</strong></div>
+          <p class="fine" id="fiveSAdvice"></p>
+        </aside>
+        <div class="script-box">
+          <div class="script-head"><span>🗣 مذاکره درون تیمی</span><small>وقتی همکار میگوید «همینجوری هم پیدا می‌کنیم»</small></div>
+          <div class="bubble them">«آدرس دادن وقت تلف کردنه، من بلدم کجاست.»</div>
+          <div class="bubble us"><b>عدد، نه بحث:</b> «درست میگی، تجربهت خیلی کمک میکنه. فقط دیروز سه بار دنبال فیلتر ۲۰۶ گشتیم، هر بار حدود ۴ دقیقه. اگر ۳۰ بار در هفته تکرار بشه، دو ساعت از وقت ماست. بیا دو هفته فقط ۲۰ کد پر فروش رو آدرس بدیم؛ اگه زمان پیک کم نشد، برمیگردیم به همین روش خودت.»</div>
+          <div class="bubble us"><b>با تأمینکننده:</b> «برای سفارش بعدی، روی هر کارتن برچسب کد فنی + بارکد بزن و تعداد در کارتن رو ثابت نگه دار. این کار ورود کالای شما رو برای ما سریعتر میکنه، پس سفارش تکرار هم سریعتر میاد.»</div>
+          <div class="card-note">الگو: <b>تأیید تجربه او → آوردن یک عدد کوچک → پیشنهاد آزمایش محدود و بی خطر</b>. تغییر را به «امتحان» تبدیل کنید، نه «دستور».</div>
+        </div>
+      </div>
+
+      <div class="check-block">
+        <h4>✅ چک لیست اجرا · فصل ۱</h4>
+        <ul class="checklist" data-group="m1">
+          <li><label><input type="checkbox" data-check="m1-1"><span>مسیر ورود تا خروج کالا را روی کاغذ کشیدم و محل قرنطینه را مشخص کردم.</span></label></li>
+          <li><label><input type="checkbox" data-check="m1-2"><span>۲۰ کد پرگردش ۹۰ روز اخیر را شناسایی و به منطقه طلایی منتقل کردم.</span></label></li>
+          <li><label><input type="checkbox" data-check="m1-3"><span>ساختار آدرس را تعیین و حداقل یک راهرو را کاملاً برچسب زدم.</span></label></li>
+          <li><label><input type="checkbox" data-check="m1-4"><span>قانون «هیچ قطعهای بدون آدرس» را با تیم هماهنگ کردم.</span></label></li>
+          <li><label><input type="checkbox" data-check="m1-5"><span>یک ممیزی 5S انجام دادم و پایینترین S را برای ماه بعد هدف گذاشتم.</span></label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-block"><h4>🎯 تمرین فصل ۱</h4><div class="quiz" data-quiz="m1"></div></div>
+    </section>
+
+    <!-- ============================================================
+         فصل ۲
+    ============================================================= -->
+    <section class="module" id="module-2" data-accent="coral" data-module="m2">
+      <header class="module-head">
+        <div class="module-num">۰۲</div>
+        <div class="module-head-text">
+          <span class="eyebrow">فصل دوم · مذاکره خرده فروشی</span>
+          <h2>پشت کانتر: اعتماد بفروشید، بعد قیمت بگویید</h2>
+          <p>مشتری قطعه یدکی نمیخرد؛ «خودرویی که دوباره درست کار کند» میخرد. مذاکره اینجا یعنی کمک کردن به یک تصمیم مطمئن، نه چانه زدن سر چند تومان.</p>
+        </div>
+        <div class="module-badge"><span>سطح</span><b>مقدماتی</b><span>زمان</span><b>۱۲ دقیقه</b></div>
+      </header>
+
+      <div class="quick-summary">
+        <div class="qs-title"><span aria-hidden="true">⚡</span> چکیده ۶۰ ثانیه‌ای</div>
+        <ul>
+          <li>اول <b>تطبیق</b> (مدل، سال، کد موتور، VIN، کد فنی قدیمی)، بعد <b>ارزش</b>، آخر <b>قیمت</b>.</li>
+          <li>هر تخفیف در ازای چیزی داده می‌شود: پرداخت نقد، خرید همراه، یا عدم مرجوعی. «بی دلیل» ممنوع.</li>
+          <li>کف قیمت را از قبل با فرمول بدانید: <code>قیمت تمامشده ÷ (۱ − حداقل حاشیه)</code>.</li>
+          <li>اعتراض «گرونه» یعنی «هنوز ارزشش را نفهمیدم»، نه حتماً «پول ندارم».</li>
+        </ul>
+      </div>
+
+      <h3 class="block-h" id="m2-trust"><span class="h-num">۱</span> سه دقیقه اول: تطبیق، بزرگترین خدمت شماست</h3>
+      <div class="cards-grid cols-3">
+        <article class="card"><span class="card-ic">🔎</span><h4>شش سؤال کشف نیاز</h4>
+          <ol class="tight"><li>دقیقاً چه خودرو، چه سال، چه موتوری؟ (تیپ و کد موتور فرق می‌کند)</li><li>علائم چیست و کی شروع شد؟</li><li>قطعه فعلی را آوردهاید یا شماره رویش خواناست؟</li><li>کی نصب می‌کند و کی لازم دارید؟</li><li>تا حالا چه برندی گرفتید، راضی بودید؟</li><li>بودجهای مدنظر دارید یا کیفیت اولویت است؟</li></ol>
+          <div class="card-note">سؤال آخر را بعد از ساختن ارزش بپرسید، نه قبلش؛ وگرنه گفتگو از همان اول قیمتی می‌شود.</div>
+        </article>
+        <article class="card"><span class="card-ic">🛡</span><h4>چهار لایه اطمینان</h4>
+          <ul class="tight"><li><b>اصالت:</b> اصلی / برند معتبر aftermarket / اقتصادی — شفاف و بدون ابهام.</li><li><b>تطبیق:</b> مقایسه کد فنی با کاتالوگ، عکس قطعه، یا VIN.</li><li><b>گارانتی و مرجوعی:</b> شرایط، مدت، چه چیزی شامل نمی‌شود (نصب اشتباه).</li><li><b>پیگیری:</b> «فردا بعد از نصب یک پیام میدم ببینم درست شد.»</li></ul>
+          <div class="card-note">هرگز به خاطر فروش، تطبیق نامطمئن را «حتماً میخوره» اعلام نکنید. یک مرجوعی، سه مشتری از دست می‌دهد.</div>
+        </article>
+        <article class="card"><span class="card-ic">👥</span><h4>چهار تیپ خریدار</h4>
+          <ul class="tight"><li><b>تعمیرکار:</b> زمان و تکرارپذیری مهم است → کد دقیق، موجودی پایدار، فاکتور سریع.</li><li><b>مالک خودرو:</b> نیاز به توضیح ساده و اطمینان → مقایسه تصویری، گارانتی.</li><li><b>ناوگان / راننده:</b> توقف خودرو هزینه دارد → تحویل فوری، باندل، قیمت دورهای.</li><li><b>تلفنی / آنلاین:</b> بدون دیدن قطعه → عکس، کد، شرایط مرجوعی مکتوب.</li></ul>
+          <div class="card-note">جملهتان را با تیپ عوض کنید؛ یک متن ثابت برای همه، نیمی از مشتریها را سرد می‌کند.</div>
+        </article>
+      </div>
+
+      <h3 class="block-h" id="m2-value"><span class="h-num">۲</span> به جای یک قیمت، سه گزینه بدهید</h3>
+      <p class="lead-p">وقتی فقط یک گزینه باشد، سؤال مشتری «ارزونتر هم هست؟» می‌شود. با سه گزینه، سؤال تبدیل می‌شود به «کدوم برام مناسبه؟» — این همان جایی است که مذاکره از جنگ قیمت خارج می‌شود.</p>
+      <div class="options-row">
+        <div class="option-card"><span>گزینه ۱</span><b>اقتصادی</b><p>برای استفاده کوتاهمدت یا بودجه محدود؛ ضمانت محدودتر، صراحتاً توضیح داده شود.</p><em>«اگر فقط تا سرویس بعدی میخواید...»</em></div>
+        <div class="option-card featured"><span class="ribbon">پیشنهاد ما</span><span>گزینه ۲</span><b>متوازن ⭐</b><p>برند معتبر، گارانتی مشخص، موجودی پایدار. بیشترین انتخاب مشتریهای دائمی.</p><em>«چیزی که خودم روی ماشین خودم می‌بندم...»</em></div>
+        <div class="option-card"><span>گزینه ۳</span><b>اصلی / OEM</b><p>برای خودروهای حساس، گارانتی نمایندگی یا زمانی که مشتری دقیقاً همین را خواسته.</p><em>«اگر میخواید دقیقاً مثل قطعه فابریک...»</em></div>
+      </div>
+      <div class="script-box compact">
+        <div class="script-head"><span>🗣 جمله آماده</span><small>ارائه ارزش قبل از عدد</small></div>
+        <div class="bubble us">«برای <b>پژو ۲۰۶ تیپ ۵، مدل ۹۶</b>، لنت جلو رو با کد فنی روی قطعه قدیمی تطبیق دادم. گزینه پیشنهادی من برند <b>××</b> هست: گارانتی ۶ ماهه، بدون صدای سوت، و همراهش گریس و پیچ نو هم میدم که تعمیرکار دیگه معطل نشه. اگه بخواید اقتصادیتر هم هست، ولی اونو فقط برای کار کوتاهمدت پیشنهاد می‌کنم.»</div>
+        <div class="card-note">ترتیب طلایی: <b>تطبیق دقیق ← پیامد برای مشتری ← گارانتی ← خدمت همراه ← قیمت</b>.</div>
+      </div>
+
+      <div class="split">
+        <aside class="soft-panel">
+          <h4>🧰 ابزار ۳ · سقف تخفیف و نردبان پیشنهاد</h4>
+          <p class="fine">عددها را با واحد پولی که استفاده می‌کنید (مثلاً تومان) وارد کنید. اعداد فارسی و جداکننده هم پذیرفته می‌شود.</p>
+          <div class="field-row" id="retailTool">
+            <label>قطعه / خودرو<input id="rPart" type="text" value="لنت ترمز جلو · پژو ۲۰۶" placeholder="مثلاً فیلتر روغن پراید"></label>
+            <label>بهای تمامشده<input id="rCost" type="text" inputmode="numeric" data-numeric value="۴۲۰٫۰۰۰"></label>
+            <label>حداقل حاشیه (٪)<input id="rMargin" type="text" inputmode="numeric" data-numeric value="۱۸"></label>
+            <label>حاشیه هدف (٪)<input id="rTarget" type="text" inputmode="numeric" data-numeric value="۳۲"></label>
+            <label>قیمت رقیب (اختیاری)<input id="rCompetitor" type="text" inputmode="numeric" data-numeric value="" placeholder="خالی بگذارید"></label>
+            <label>خدمت همراه<input id="rBundle" type="text" value="گریس و پیچ نو + تطبیق کد فنی"></label>
+          </div>
+          <div class="result-grid">
+            <div><small>قیمت پیشنهادی</small><strong id="rOpen">—</strong></div>
+            <div><small>کف مطلق (خط قرمز)</small><strong id="rFloor">—</strong></div>
+            <div><small>فضای مجاز چانه</small><strong id="rRoom">—</strong></div>
+          </div>
+          <div class="ladder" id="rLadder"></div>
+          <p class="fine" id="rWarning"></p>
+          <div class="output-box"><small>متن آماده برای گفتن</small><p id="rScript" class="generated-script"></p></div>
+          <button class="btn btn-sm btn-outline" data-copy="#rScript">کپی متن مذاکره</button>
+        </aside>
+        <div>
+          <div class="flow-stepper" data-flow="retail">
+            <div class="stepper-head"><h4>🧰 ابزار ۴ · شبیهساز شش گام گفتگو</h4><span class="step-count" id="flowCount">۱ / ۶</span></div>
+            <div class="stepper-body" id="flowBody"></div>
+            <div class="stepper-actions"><button class="btn btn-sm btn-outline" id="flowPrev">قبلی</button><button class="btn btn-sm btn-primary" id="flowNext">گام بعد ←</button></div>
+          </div>
+          <div class="flashcard" id="objectionCard">
+            <div class="flash-top"><span>🎴 کارت اعتراض</span><button class="btn btn-sm btn-ghost" id="objectionNext">کارت بعدی 🎲</button></div>
+            <p class="flash-q" id="objectionText">…</p>
+            <button class="btn btn-sm btn-outline" id="objectionReveal">نمایش پاسخ پیشنهادی</button>
+            <div class="flash-a" id="objectionAnswer" hidden></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabs" data-tabs>
+        <div class="tab-list" role="tablist" aria-label="پاسخ به اعتراضها">
+          <button class="tab is-active" data-tab="t2a" role="tab">الگوی LAER</button>
+          <button class="tab" data-tab="t2b" role="tab">«بده - بگیر»</button>
+          <button class="tab" data-tab="t2c" role="tab">بستن فروش</button>
+          <button class="tab" data-tab="t2d" role="tab">اخلاق حرفهای</button>
+        </div>
+        <div class="tab-panels">
+          <div class="tab-panel is-active" data-panel="t2a">
+            <p class="lead-p">برای هر اعتراض، چهار حرکت: <b>گوش بده</b> (قطع نکن) ← <b>همدلی و تأیید</b> (حق میدم) ← <b>پرسش</b> (با چی مقایسه می‌کنید؟) ← <b>پاسخ مستند</b> (کد، گارانتی، عدد).</p>
+            <div class="mini-table"><div><b>اعتراض</b><b>پرسش کلیدی</b><b>جهت پاسخ</b></div>
+              <div><span>«گرونه!»</span><span>«با چه گزینهای مقایسش می‌کنید؟»</span><span>تفاوت را به جنس، گارانتی و طول عمر ترجمه کنید.</span></div>
+              <div><span>«فلانجا ارزونتره»</span><span>«همون کد فنی و همون برنده؟»</span><span>تطبیق دقیق + هزینه رفت و برگشت + ریسک نصب دوباره.</span></div>
+              <div><span>«مطمئنی جا میفته؟»</span><span>«کد روی قطعهدار رو بفرستید؟»</span><span>کاتالوگ نشان دهید؛ اگر شک دارید، صادقانه بگویید بررسی می‌کنید.</span></div>
+              <div><span>«همین الان لازم دارم»</span><span>«کجا نصب میشه، کی تحویل بگیره؟»</span><span>زمان تحویل را دقیق بگویید؛ قول بیپشتوانه ندهید.</span></div>
+              <div><span>«یه تخفیف بده دیگه»</span><span>«اگر نقد حساب کنید، براتون چیکار کنم؟»</span><span>تخفیف در ازای عوض مشخص، و فقط تا کف قیمت.</span></div>
+            </div>
+          </div>
+          <div class="tab-panel" data-panel="t2b">
+            <p class="lead-p">قاعده: <b>هیچ امتیازی مجانی نیست</b>. جدول زیر را حفظ کنید؛ هر ستون راست، بهای ستون چپ است.</p>
+            <div class="giveget">
+              <div><span>دادم: ۵٪ تخفیف</span><i>⇄</i><span>گرفتم: پرداخت نقدی همان لحظه</span></div>
+              <div><span>دادم: ارسال رایگان</span><i>⇄</i><span>گرفتم: خرید باندل (لنت + دیسک)</span></div>
+              <div><span>دادم: قیمت ویژه</span><i>⇄</i><span>گرفتم: معرفی یک تعمیرکار / شماره تماس برای پیگیری</span></div>
+              <div><span>دادم: تعویض سریع</span><i>⇄</i><span>گرفتم: عدم مرجوعی بعد از باز کردن بسته</span></div>
+            </div>
+            <div class="card-note">اگر طرف مقابل هیچ عوضی نداد، لبخند بزنید و بگویید: «پس فعلاً همون قیمتی که گفتیم، چون روش همون گارانتی و خدمات حساب شده.» دادن بیعوض یاد می‌دهد دفعه بعد هم فشار بیاورد.</div>
+          </div>
+          <div class="tab-panel" data-panel="t2c">
+            <ol class="steps-list"><li><b>خلاصه کنید:</b> «پس لنت ×× با گارانتی ۶ ماهه، همراه گریس و پیچ، امروز ساعت ۴ آمادست.»</li><li><b>سؤال بستن بپرسید:</b> «براتون بسته کنم یا اول عکس کد رو بفرستم؟» (هر دو پاسخ، ادامه گفتگو است).</li><li><b>افزودنی مرتبط:</b> «دیسک رو هم چک کنیم؟ چون با لنت نو، اگه خط داشته باشه صدا میده.» — پیشنهاد فنی، نه فشار فروش.</li><li><b>ثبت دقیق:</b> کد فنی، آدرس قفسه، شماره فاکتور، تاریخ، شرایط گارانتی، شماره مشتری.</li><li><b>پیگیری:</b> فردای نصب یک پیام کوتاه. اینجا مشتری دائمی ساخته می‌شود، نه موقع پرداخت.</li></ol>
+          </div>
+          <div class="tab-panel" data-panel="t2d">
+            <ul class="danger-list"><li>گفتن «اصلیه» برای قطعهای که اصلی نیست.</li><li>پنهان کردن هزینه نصب، ارسال یا مالیات تا لحظه صدور فاکتور.</li><li>تطبیق حدسی برای خالی نکردن مشتری، به امید اینکه «اگه نخورد پس میاره».</li><li>تخفیف زیر کف قیمت فقط برای «بردن» رقابت؛ ضررش فصل بعد در دفتر معلوم می‌شود.</li></ul>
+            <div class="card-note">شهرت فروشگاه قطعات یدکی، آهسته ساخته می‌شود و سریع خراب. «نفروختم، چون مطمئن نبودم» یک جمله سرمایهای است.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="check-block">
+        <h4>✅ چک لیست اجرا · فصل ۲</h4>
+        <ul class="checklist" data-group="m2">
+          <li><label><input type="checkbox" data-check="m2-1"><span>برگه شش سؤال کشف نیاز را کنار صندوق چسباندم.</span></label></li>
+          <li><label><input type="checkbox" data-check="m2-2"><span>برای ۱۰ قطعه پرتکرار، سه گزینه قیمتی/کیفیتی تعریف کردم.</span></label></li>
+          <li><label><input type="checkbox" data-check="m2-3"><span>کف قیمت و سقف تخفیف را با فرمول، روی کاغذ کنار کانتر نوشتم.</span></label></li>
+          <li><label><input type="checkbox" data-check="m2-4"><span>پنج اعتراض رایج را با همکار، بلند و روبهرو تمرین کردیم.</span></label></li>
+          <li><label><input type="checkbox" data-check="m2-5"><span>یک پیام پیگیری فردای نصب برای مشتری امروز فرستادم.</span></label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-block"><h4>🎯 تمرین فصل ۲</h4><div class="quiz" data-quiz="m2"></div></div>
+    </section>
+
+    <!-- ============================================================
+         فصل ۳
+    ============================================================= -->
+    <section class="module" id="module-3" data-accent="indigo" data-module="m3">
+      <header class="module-head">
+        <div class="module-num">۰۳</div>
+        <div class="module-head-text">
+          <span class="eyebrow">فصل سوم · مذاکره عمده فروشی</span>
+          <h2>پای میز عمده: قیمت تنها یک مهره از ۹ مهره است</h2>
+          <p>خریدار عمده (تعمیرگاه، همکار شهرستان، ناوگان) دنبال «کمترین عدد روی فاکتور» نیست؛ دنبال <b>قابلیت اتکا، جریان نقد و ریسک کمتر</b> است. بلد باشید اینها را قیمتگذاری کنید.</p>
+        </div>
+        <div class="module-badge"><span>سطح</span><b>متوسط</b><span>زمان</span><b>۱۴ دقیقه</b></div>
+      </header>
+
+      <div class="quick-summary">
+        <div class="qs-title"><span aria-hidden="true">⚡</span> چکیده ۶۰ ثانیه‌ای</div>
+        <ul>
+          <li>قبل از جلسه سه عدد داشته باشید: <b>هدف، کف (Walk-away)، و بهترین جایگزین (BATNA)</b>.</li>
+          <li>تخفیف حجمی <b>پلکانی و مشروط</b> بدهید، نه یکجا و از همان سفارش اول.</li>
+          <li>هر امتیاز (اعتبار، حمل، مرجوعی، انحصار) قیمتی دارد؛ آن را به عدد تبدیل کنید.</li>
+          <li>تصمیم را با «قیمت مؤثر» مقایسه کنید، نه با درصد تخفیف؛ آخرش همهچیز مکتوب شود.</li>
+        </ul>
+      </div>
+
+      <h3 class="block-h" id="m3-prep"><span class="h-num">۱</span> آمادگی: سه عدد و یک برگه</h3>
+      <div class="split">
+        <div>
+          <div class="cards-grid cols-2">
+            <article class="card"><span class="card-ic">🎯</span><h4>هدف / کف / جایگزین</h4>
+              <ul class="tight"><li><b>هدف (Target):</b> قراردادی که خوشحالتان می‌کند.</li><li><b>کف (Walk-away):</b> پایینترش را امضا نمی‌کنید — حتی اگر مشتری بزرگ است.</li><li><b>BATNA:</b> اگر امروز توافق نشد، فردا چه می‌کنید؟ (فروش به سه مشتری کوچکتر، کاهش سفارش، برند جایگزین).</li><li><b>ZOPA:</b> جایی که کف شما و سقف او همپوشان است؛ آنجا را پیدا کنید.</li></ul>
+              <div class="card-note">کسی که BATNA ندارد، تنها گزینهاش «بله گفتن» است. قبل از جلسه، جایگزین واقعی بسازید.</div>
+            </article>
+            <article class="card"><span class="card-ic">📋</span><h4>درباره مشتری چه بدانیم</h4>
+              <ul class="tight"><li>ترکیب سبدش: کدام قطعهها و چه تناوبی میخرد.</li><li>سابقه پرداخت، سقف اعتبار امن، فصل اوج کارش.</li><li>تأمینکننده فعلی و دلیل نارضایتیش (قیمت؟ تأخیر؟ مرجوعی؟).</li><li>چه کسی تصمیم میگیرد و چه کسی فقط مذاکره می‌کند.</li><li>هزینه تمامشده و حداقل حاشیهای که می‌توانید بدهید.</li></ul>
+              <div class="card-note">اولین سفارش بزرگ + درخواست اعتبار ۹۰ روزه = پرچم قرمز. با سفارش آزمایشی کوچک شروع کنید.</div>
+            </article>
+          </div>
+          <div class="soft-panel flat" id="batnaTool">
+            <h4>🧰 ابزار ۵ · برگه قبل از جلسه (ذخیره می‌شود)</h4>
+            <div class="field-row">
+              <label>هدف من<textarea id="batnaTarget" rows="2" placeholder="مثلاً: ۱۲۰ عدد در ماه، نقد/۱۵ روز، تخفیف ۸٪"></textarea></label>
+              <label>کف / خط قرمز<textarea id="batnaFloor" rows="2" placeholder="مثلاً: زیر ۱۲٪ حاشیه و اعتبار بالای ۳۰ روز، خیر"></textarea></label>
+              <label>جایگزین واقعی (BATNA)<textarea id="batnaAlt" rows="2" placeholder="مثلاً: همان حجم را بین ۳ تعمیرگاه محلی پخش می‌کنم"></textarea></label>
+            </div>
+            <p class="fine" id="batnaStatus">همین که تایپ کنید، ذخیره می‌شود.</p>
+          </div>
+        </div>
+        <div class="nine-grid">
+          <h4>۹ مهره مذاکره عمده</h4>
+          <p class="fine">هر کدام را می‌شود داد یا گرفت. قیمت فقط یکی از آنهاست.</p>
+          <div><span>۱</span>قیمت و تخفیف پلکانی</div><div><span>۲</span>حداقل سفارش (MOQ)</div><div><span>۳</span>مدت اعتبار و چک</div>
+          <div><span>۴</span>حمل و نحوه تحویل</div><div><span>۵</span>زمان تحویل و نرخ پرکردن سفارش</div><div><span>۶</span>مرجوعی و RMA</div>
+          <div><span>۷</span>گارانتی و ادعای معیوبی</div><div><span>۸</span>انحصار منطقهای / ریبیت فصلی</div><div><span>۹</span>کالای امانی و اشتراک داده فروش</div>
+        </div>
+      </div>
+
+      <h3 class="block-h" id="m3-price"><span class="h-num">۲</span> «قیمت مؤثر»؛ عددی که درصد تخفیف پنهانش می‌کند</h3>
+      <p class="lead-p">دو پیشنهاد را مقایسه کنید: یکی ۱۲٪ تخفیف با ۶۰ روز اعتبار و مرجوعی آزاد، دیگری ۷٪ تخفیف نقدی و حمل رایگان. روی کاغذ اولی ارزانتر است؛ در دفتر، شاید دومی باشد. ابزار زیر این تفاوت را نشان می‌دهد.</p>
+      <div class="soft-panel wide">
+        <h4>🧰 ابزار ۶ · مقایسه دو پیشنهاد عمده</h4>
+        <p class="fine">محاسبه تصمیمیاری است، نه سند حسابداری: هزینه سرمایه = مبلغ × روزهای اعتبار ÷ ۳۶۵ × نرخ سالانه؛ ریسک مرجوعی ≈ نرخ مرجوعی × ۵۰٪ ارزش (افت قیمت و حمل برگشت).</p>
+        <div class="deal-wrap" id="wholesaleTool">
+          <label class="global-field">نرخ هزینه سرمایه سالانه (٪)<input id="wRate" type="text" inputmode="numeric" data-numeric value="۲۴"></label>
+          <div class="deal-card" data-deal="1">
+            <h5>پیشنهاد الف</h5>
+            <label>قیمت لیست هر واحد<input class="w-list" type="text" inputmode="numeric" data-numeric value="۱٫۰۰۰٫۰۰۰"></label>
+            <label>تخفیف (٪)<input class="w-disc" type="text" inputmode="numeric" data-numeric value="۱۲"></label>
+            <label>روزهای اعتبار<input class="w-days" type="text" inputmode="numeric" data-numeric value="۶۰"></label>
+            <label>سهم حمل ما (هر واحد)<input class="w-freight" type="text" inputmode="numeric" data-numeric value="۰"></label>
+            <label>نرخ مرجوعی (٪)<input class="w-ret" type="text" inputmode="numeric" data-numeric value="۶"></label>
+            <label>ریبیت پایان دوره (٪)<input class="w-rebate" type="text" inputmode="numeric" data-numeric value="۰"></label>
+          </div>
+          <div class="deal-card" data-deal="2">
+            <h5>پیشنهاد ب</h5>
+            <label>قیمت لیست هر واحد<input class="w-list" type="text" inputmode="numeric" data-numeric value="۱٫۰۰۰٫۰۰۰"></label>
+            <label>تخفیف (٪)<input class="w-disc" type="text" inputmode="numeric" data-numeric value="۷"></label>
+            <label>روزهای اعتبار<input class="w-days" type="text" inputmode="numeric" data-numeric value="۰"></label>
+            <label>سهم حمل ما (هر واحد)<input class="w-freight" type="text" inputmode="numeric" data-numeric value="۱۵٫۰۰۰"></label>
+            <label>نرخ مرجوعی (٪)<input class="w-ret" type="text" inputmode="numeric" data-numeric value="۲"></label>
+            <label>ریبیت پایان دوره (٪)<input class="w-rebate" type="text" inputmode="numeric" data-numeric value="۲"></label>
+          </div>
+        </div>
+        <div class="result-grid three">
+          <div><small>قیمت مؤثر · الف</small><strong id="wOut1">—</strong><em id="wBr1"></em></div>
+          <div><small>قیمت مؤثر · ب</small><strong id="wOut2">—</strong><em id="wBr2"></em></div>
+          <div class="winner"><small>نتیجه</small><strong id="wWinner">—</strong><em id="wDiff"></em></div>
+        </div>
+      </div>
+
+      <div class="split">
+        <div class="script-box">
+          <div class="script-head"><span>🗣 جملههای سر میز</span><small>فرمول «اگر… آنگاه…»</small></div>
+          <div class="bubble us">«اگر حجم رو به ۱۵۰ عدد در ماه برسونیم و تسویه ۱۵ روزه باشه، <b>آنگاه</b> میتونم پلکان تخفیف ۸ و ۱۰ درصد رو براتون فعال کنم.»</div>
+          <div class="bubble them">«رقیبتون ۱۴ درصد داده، همون بدید تمومه.»</div>
+          <div class="bubble us">«متوجهام، عدد مهمیه. فقط قبلش دو تا چیز رو روشن کنیم: اون ۱۴ درصد روی کدوم کدفنیها، با چه مدت تسویه و چه شرایط مرجوعیه؟ من ترجیح میدم عددی بدم که آخر ماه هم پابرجا باشه، نه عددی که بعدش با هزینه حمل و برگشتی جبران بشه.»</div>
+          <div class="bubble us">«بیایید هر چی توافق کردیم همینجا روی برگه بنویسیم و هر دومون امضا کنیم؛ بعدش دیگه بحث «کی چی گفت» نمیمونه.»</div>
+          <div class="card-note">تاکتیکهای مفید: <b>سکوت بعد از پیشنهاد</b>، نامگذاری امتیاز («این استثناء مخصوص شماست، نه تغییر قیمت لیست»)، و خلاصه مکتوب پایان جلسه. تاکتیک ممنوع: نصف کردن اختلاف بدون محاسبه.</div>
+        </div>
+        <div class="soft-panel flat">
+          <h4>🧰 ابزار ۷ · دفتر «بده / بگیر»</h4>
+          <p class="fine">هر بار امتیازی دادید، ردیفش را بنویسید. اگر ستون چپ پر شد و راست خالی ماند، یعنی مذاکره دارد یکطرفه می‌شود.</p>
+          <div class="field-row" id="concessionTool">
+            <label>آنچه دادم<input id="cGive" type="text" placeholder="مثلاً ۳٪ تخفیف اضافه"></label>
+            <label>آنچه گرفتم<input id="cGet" type="text" placeholder="مثلاً تسویه ۱۵ روزه + MOQ بالاتر"></label>
+          </div>
+          <button class="btn btn-sm btn-primary" id="cAdd">ثبت ردیف</button>
+          <div class="table-scroll"><table class="data-table" id="cTable"><thead><tr><th>دادم</th><th>گرفتم</th><th></th></tr></thead><tbody></tbody></table></div>
+          <p class="fine" id="cBalance"></p>
+        </div>
+      </div>
+
+      <div class="tabs" data-tabs>
+        <div class="tab-list" role="tablist" aria-label="جزئیات قرارداد عمده">
+          <button class="tab is-active" data-tab="t3a" role="tab">پلکان تخفیف</button>
+          <button class="tab" data-tab="t3b" role="tab">حداقلهای قرارداد</button>
+          <button class="tab" data-tab="t3c" role="tab">پرچمهای قرمز</button>
+        </div>
+        <div class="tab-panels">
+          <div class="tab-panel is-active" data-panel="t3a">
+            <div class="mini-table three-col"><div><b>حجم ماهانه</b><b>تخفیف</b><b>شرط</b></div>
+              <div><span>تا ۴۹ عدد</span><span>۰٪</span><span>نقد / فاکتور روز</span></div>
+              <div><span>۵۰–۹۹ عدد</span><span>۵٪</span><span>تسویه حداکثر ۱۵ روز</span></div>
+              <div><span>۱۰۰–۱۹۹ عدد</span><span>۸٪</span><span>سفارش ماهانه ثابت + پیشبینی ۳۰ روزه</span></div>
+              <div><span>۲۰۰ عدد به بالا</span><span>۱۰٪ + ریبیت فصلی</span><span>قرارداد، سقف اعتبار، RMA مشخص</span></div>
+            </div>
+            <p class="fine">چرا پلکانی؟ چون تخفیف پلهای، مشتری را به حجم بالاتر دعوت می‌کند و از «همین عدد رو همیشه کمتر بده» جلوگیری می‌کند. پلکان را بر اساس حاشیه واقعی خودتان بچینید؛ اعداد بالا نمونهاند.</p>
+          </div>
+          <div class="tab-panel" data-panel="t3b">
+            <ul class="tight two-col-list"><li>کد فنی دقیق، برند، بستهبندی و کشور سازنده</li><li>قیمت، جدول تخفیف و نحوه تغییر قیمت و نحوه اعلام آن</li><li>حداقل سفارش، برنامه سفارش و زمان تحویل</li><li>محل تحویل، هزینه حمل، مالکیت کالا تا تسویه</li><li>سقف اعتبار، نوع چک/ضمانت، جریمه تأخیر (طبق توافق و قانون)</li><li>شرایط RMA: مهلت، دلیل مجاز، وضعیت بستهبندی، جایگزین یا بازپرداخت</li><li>گارانتی و نحوه رسیدگی به ادعای معیوبی</li><li>انحصار منطقهای (اگر هست) و تعهد حجم متقابل</li><li>فورس ماژور، حل اختلاف، مدت قرارداد و بازنگری دورهای</li><li>امضای دو طرف، تاریخ، شماره نسخه قرارداد</li></ul>
+            <div class="card-note">هر بندی که شفاهی ماند، یک اختلاف آینده است. «همون همیشگی» در قرارداد معنایی ندارد. تنظیم نهایی را با مشاور حقوقی / حسابدار خودتان هماهنگ کنید.</div>
+          </div>
+          <div class="tab-panel" data-panel="t3c">
+            <ul class="danger-list"><li>سفارش اول خیلی بزرگ + درخواست اعتبار طولانی بدون سابقه.</li><li>اصرار بر «همین امروز امضا کن، جزئیات بعداً».</li><li>فقط درباره قیمت حرف زدن و زیر بار هیچ شرایط تحویل/مرجوعی نرفتن.</li><li>کدفنیهای مبهم، عکس بی کیفیت، «همونی که دفعه قبل دادید».</li><li>تقاضای انحصار بدون تعهد حجم یا پیشپرداخت.</li><li>چک بدون پشتوانه / تأخیرهای پی در پی که با «فقط این ماه» توجیه می‌شود.</li></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="check-block">
+        <h4>✅ چک لیست اجرا · فصل ۳</h4>
+        <ul class="checklist" data-group="m3">
+          <li><label><input type="checkbox" data-check="m3-1"><span>هدف، کف و BATNA را قبل از جلسه روی کاغذ نوشتم.</span></label></li>
+          <li><label><input type="checkbox" data-check="m3-2"><span>پلکان تخفیف مشروط به حجم و مدت تسویه طراحی کردم.</span></label></li>
+          <li><label><input type="checkbox" data-check="m3-3"><span>حداقل یکبار «قیمت مؤثر» دو پیشنهاد را محاسبه کردم.</span></label></li>
+          <li><label><input type="checkbox" data-check="m3-4"><span>برگه حداقلهای قرارداد را برای مذاکره بعدی چاپ کردم.</span></label></li>
+          <li><label><input type="checkbox" data-check="m3-5"><span>هر توافق را همان جلسه مکتوب و دوطرفه امضا کردم.</span></label></li>
+        </ul>
+      </div>
+      <div class="quiz-block"><h4>🎯 تمرین فصل ۳</h4><div class="quiz" data-quiz="m3"></div></div>
+    </section>
+
+    <!-- ============================================================
+         فصل ۴
+    ============================================================= -->
+    <section class="module" id="module-4" data-accent="amber" data-module="m4">
+      <header class="module-head">
+        <div class="module-num">۰۴</div>
+        <div class="module-head-text">
+          <span class="eyebrow">فصل چهارم · راهنمای مقدماتی حسابداری</span>
+          <h2>حساب پاک: بدانید سود کجاست و پول کجاست</h2>
+          <p>فروشگاهی که خوب میفروشد ولی نمیداند پولش کجا گیر کرده، شبیه انباری است پر از جعبه بدون آدرس. این فصل، حداقل دانشی است که صاحب فروشگاه باید هر روز بداند.</p>
+        </div>
+        <div class="module-badge"><span>سطح</span><b>مقدماتی</b><span>زمان</span><b>۱۴ دقیقه</b></div>
+      </header>
+
+      <div class="quick-summary">
+        <div class="qs-title"><span aria-hidden="true">⚡</span> چکیده ۶۰ ثانیه‌ای</div>
+        <ul>
+          <li><b>سود ≠ پول نقد.</b> فروش نسیه سود میسازد ولی صندوق را پر نمی‌کند.</li>
+          <li>چهار فرمول: <code>سود ناخالص = فروش − بهای کالای فروشرفته</code>، <code>سود خالص = سود ناخالص − هزینهها</code>، <code>بهای کالای فروشرفته = موجودی اول + خرید − موجودی آخر</code>، <code>نقطه سربهسر = هزینه ثابت ÷ حاشیه سود ناخالص</code>.</li>
+          <li>همه چیز سنددار: فاکتور خرید/فروش شمارهدار، رسید ورود/خروج انبار، گردش صندوق روزانه.</li>
+          <li>پول شخصی و پول فروشگاه جدا؛ این یک قانون است، نه توصیه.</li>
+        </ul>
+      </div>
+
+      <h3 class="block-h" id="m4-basics"><span class="h-num">۱</span> ده واژهای که باید مسلط باشید</h3>
+      <div class="glossary-grid">
+        <div><b>دارایی</b><span>آنچه مال شماست: نقد، بانک، موجودی کالا، مطالبات از مشتریان، قفسه و تجهیزات.</span></div>
+        <div><b>بدهی</b><span>آنچه به دیگران بدهکارید: بدهی به تأمینکننده، چک پرداختنی، وام.</span></div>
+        <div><b>سرمایه / حقوق صاحب</b><span>سهم خودتان: دارایی منهای بدهی. معادله همیشه <code>دارایی = بدهی + سرمایه</code>.</span></div>
+        <div><b>درآمد فروش</b><span>مبلغ فاکتورهای فروش کالا (بدون احتساب مالیات بر ارزش افزودهای که امانتدار آن هستید).</span></div>
+        <div><b>بهای تمامشده کالای فروشرفته (COGS)</b><span>قیمت خرید همان قطعههایی که فروختید + حمل خرید؛ نه قیمت فروش، نه کل خریدهای ماه.</span></div>
+        <div><b>سود ناخالص</b><span>فروش منهای COGS. پولی که باید اجاره، حقوق، حمل و بقیه هزینهها را از آن بدهید.</span></div>
+        <div><b>هزینه عملیاتی</b><span>اجاره، حقوق، برق، بستهبندی، حمل فروش، تبلیغات، ضایعات، کارمزد.</span></div>
+        <div><b>سود خالص</b><span>سود ناخالص منهای هزینهها و سایر موارد؛ آنچه واقعاً برایتان ماند.</span></div>
+        <div><b>مطالبات / پرداختنی</b><span>پولی که مشتریها به شما بدهکارند / پولی که به تأمینکننده بدهکارید.</span></div>
+        <div><b>بدهکار / بستانکار</b><span>در ثبت دوطرفه، هر سند دو طرف دارد و جمع آنها برابر است؛ نترسید، با مثال زیر ساده می‌شود.</span></div>
+      </div>
+
+      <div class="callout important">
+        <span aria-hidden="true">⚠️</span>
+        <div><b>مهمترین جمله این فصل</b><p>امروز ۱۰۰ واحد نسیه فروختید و ۳۰ واحد سود ناخالص ساختید. فردا باید ۸۰ واحد به تأمینکننده بدهید، ولی ۱۰۰ واحد ۶۰ روز دیگر می‌رسد. <b>سود در دفتر هست، پول در صندوق نیست.</b> به همین دلیل «گردش نقد» را جداگانه، هر روز، یادداشت کنید.</p></div>
+      </div>
+
+      <h3 class="block-h" id="m4-docs"><span class="h-num">۲</span> چهار سند و یک عادت روزانه</h3>
+      <div class="cards-grid cols-4">
+        <article class="card"><span class="card-ic">🧾</span><h4>فاکتور فروش</h4><p>شمارهدار، تاریخ، نام مشتری، کد فنی، تعداد، قیمت، تخفیف، مالیات، شرایط گارانتی، نقد/نسیه.</p></article>
+        <article class="card"><span class="card-ic">📦</span><h4>رسید ورود / حواله خروج</h4><p>هر ورود و خروج انبار، حتی مرجوعی و مصرف داخلی، باید رد کاغذی داشته باشد تا موجودی با دفتر بخواند.</p></article>
+        <article class="card"><span class="card-ic">💵</span><h4>گردش صندوق</h4><p>اول صبح موجودی نقد، طول روز دریافت/پرداخت، آخر روز شمارش واقعی و مغایرت. مغایرت همان روز پیگیری شود.</p></article>
+        <article class="card"><span class="card-ic">📒</span><h4>دفتر روزنامه</h4><p>همه رویدادها به ترتیب تاریخ، با سند پشت سرش. از همان دفتر، گزارش هفته و ماه درمی‌آید.</p></article>
+      </div>
+      <div class="script-box compact">
+        <div class="script-head"><span>🗣 عادت ۱۰ دقیقهای آخر روز</span><small>همان چیزی که فصل ۱ برای انبار گفت، اینجا برای پول</small></div>
+        <div class="bubble us">«① فاکتورهای امروز شماره ردیف شدند؟ ② تک تکشان توی دفتر ثبت شد؟ ③ نقد صندوق با دفتر خواند؟ ④ نسیههای امروز به لیست مطالبات اضافه شد؟ ⑤ مرجوعیها و تخفیفها جدا ثبت شد؟»</div>
+      </div>
+
+      <h3 class="block-h" id="m4-entry"><span class="h-num">۳</span> ثبت دوطرفه، با مثالهای خود فروشگاه</h3>
+      <p class="lead-p">قرار نیست حسابدار شوید؛ فقط بدانید پول و کالا از کجا به کجا می‌رود. در جدول زیر «بدهکار» یعنی آن حسابی که افزایش/دریافت کرده، «بستانکار» یعنی منبع آن.</p>
+      <div class="table-scroll"><table class="data-table entry-table">
+        <thead><tr><th>رویداد</th><th>بدهکار (از)</th><th>بستانکار (به)</th><th>اثر مهم</th></tr></thead>
+        <tbody>
+          <tr><td>فروش نقدی لنت، ۱۰۰ (بهای تمامشده ۷۰)</td><td>نقد / بانک ۱۰۰</td><td>درآمد فروش ۱۰۰</td><td>همزمان: بهای کالای فروشرفته ۷۰ ← موجودی کالا ۷۰</td></tr>
+          <tr><td>فروش نسیه به تعمیرگاه، ۱۰۰</td><td>مطالبات ۱۰۰</td><td>درآمد فروش ۱۰۰</td><td>سود ثبت می‌شود، نقد نه</td></tr>
+          <tr><td>وصول طلب همان تعمیرگاه</td><td>نقد ۱۰۰</td><td>مطالبات ۱۰۰</td><td>سود تکرار نمی‌شود! فقط جابهجایی دارایی</td></tr>
+          <tr><td>خرید کالا نقدی، ۵۰۰</td><td>موجودی کالا ۵۰۰</td><td>نقد ۵۰۰</td><td>هنوز هزینه نیست؛ تا نفروشید «دارایی» است</td></tr>
+          <tr><td>خرید نسیه از تأمینکننده، ۵۰۰</td><td>موجودی کالا ۵۰۰</td><td>پرداختنی ۵۰۰</td><td>بدهی بالا رفت، نقد کم نشد</td></tr>
+          <tr><td>پرداخت اجاره، ۸۰</td><td>هزینه اجاره ۸۰</td><td>نقد ۸۰</td><td>سود خالص کم می‌شود</td></tr>
+          <tr><td>مرجوعی مشتری، ۱۰۰</td><td>مرجوعی/تعدیل فروش ۱۰۰</td><td>نقد یا مطالبات ۱۰۰</td><td>کالا و COGS هم برمی‌گردد</td></tr>
+        </tbody>
+      </table></div>
+      <p class="fine">قیمتگذاری موجودی: سادهترین روش برای فروشگاه کوچک <b>میانگین موزون</b> است (میانگین بهای خریدها). آن را ثابت نگه دارید و هر ماه عوض نکنید. مالیات بر ارزش افزوده، صورتحساب الکترونیکی و تکالیف قانونی را حتماً طبق <b>آخرین مقررات</b> و با حسابدار / مشاور مالیاتی خودتان هماهنگ کنید؛ نرخها و سامانهها تغییر می‌کنند.</p>
+
+      <div class="split">
+        <div class="soft-panel flat wide">
+          <h4>🧰 ابزار ۸ · دفترچه کوچک روزانه (روی همین صفحه)</h4>
+          <p class="fine">چند رویداد ساده وارد کنید و ببینید «سود» و «نقد» چطور از هم جدا می‌شوند. اطلاعات فقط در مرورگر خودتان ذخیره می‌شود.</p>
+          <div class="field-row" id="ledgerTool">
+            <label>تاریخ<input id="lDate" type="text" value=""></label>
+            <label>شرح<input id="lDesc" type="text" placeholder="مثلاً فروش لنت ۲۰۶"></label>
+            <label>مبلغ<input id="lAmount" type="text" inputmode="numeric" data-numeric placeholder="مثلاً ۱٫۲۰۰٫۰۰۰"></label>
+            <label>نوع<select id="lType">
+              <option value="sale_cash">فروش نقدی</option>
+              <option value="sale_credit">فروش نسیه</option>
+              <option value="cogs">بهای کالای فروشرفته</option>
+              <option value="purchase">خرید کالا (نقدی)</option>
+              <option value="expense">هزینه عملیاتی</option>
+              <option value="collect">وصول مطالبات</option>
+              <option value="pay">پرداخت بدهی تأمینکننده</option>
+            </select></label>
+          </div>
+          <div class="btn-row"><button class="btn btn-sm btn-primary" id="lAdd">افزودن رویداد</button><button class="btn btn-sm btn-ghost" id="lClear">پاک کردن دفتر</button></div>
+          <div class="table-scroll"><table class="data-table" id="lTable"><thead><tr><th>تاریخ</th><th>شرح</th><th>نوع</th><th>مبلغ</th><th></th></tr></thead><tbody></tbody></table></div>
+          <div class="ledger-summary" id="lSummary"></div>
+        </div>
+        <div class="side-tools">
+          <div class="soft-panel flat">
+            <h4>🧰 نقطه سربهسر</h4>
+            <div class="field-row">
+              <label>هزینه ثابت ماهانه<input id="beFixed" type="text" inputmode="numeric" data-numeric value="۴۵٫۰۰۰٫۰۰۰"></label>
+              <label>حاشیه سود ناخالص (٪)<input id="beMargin" type="text" inputmode="numeric" data-numeric value="۲۸"></label>
+              <label>میانگین فروش روزانه<input id="beDaily" type="text" inputmode="numeric" data-numeric value="۹٫۰۰۰٫۰۰۰"></label>
+            </div>
+            <div class="output-box"><small>فروش لازم برای سربهسر</small><strong id="beRevenue">—</strong></div>
+            <p class="fine" id="beDays"></p>
+          </div>
+          <div class="formula-card">
+            <h4>📐 چهار فرمول روی یک برگه</h4>
+            <div><code>COGS = موجودی اول + خرید − موجودی آخر</code></div>
+            <div><code>سود ناخالص = فروش خالص − COGS</code></div>
+            <div><code>حاشیه = سود ناخالص ÷ فروش</code></div>
+            <div><code>سود خالص = سود ناخالص − هزینهها</code></div>
+            <div><code>سربهسر = هزینه ثابت ÷ (حاشیه ÷ ۱۰۰)</code></div>
+            <div><code>روزهای وصول = مطالبات ÷ فروش روزانه</code></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabs" data-tabs>
+        <div class="tab-list" role="tablist" aria-label="گزارشها و اشتباهات">
+          <button class="tab is-active" data-tab="t4a" role="tab">سه گزارش ساده</button>
+          <button class="tab" data-tab="t4b" role="tab">عددهای نبض فروشگاه</button>
+          <button class="tab" data-tab="t4c" role="tab">هفت اشتباه پرهزینه</button>
+          <button class="tab" data-tab="t4d" role="tab">برنامه ۷ روزه</button>
+        </div>
+        <div class="tab-panels">
+          <div class="tab-panel is-active" data-panel="t4a">
+            <div class="mini-table three-col"><div><b>گزارش</b><b>سؤالی که جواب می‌دهد</b><b>حداقل شکل آن</b></div>
+              <div><span>سود و زیان (ماه)</span><span>«این ماه واقعاً چقدر سود کردم؟»</span><span>فروش − COGS − هزینهها</span></div>
+              <div><span>ترازنامه ساده</span><span>«داراییام چقدر، بدهیام چقدر؟»</span><span>نقد + موجودی + مطالبات − بدهیها</span></div>
+              <div><span>جریان نقد</span><span>«پول هفته آینده کجا می‌رود؟»</span><span>ورودی نقد − خروجی نقد + موجودی اول</span></div>
+            </div>
+            <p class="fine">همین سه خط، حتی روی یک برگه A5 دستنویس، از «حدس زدن» خیلی بهتر است.</p>
+          </div>
+          <div class="tab-panel" data-panel="t4b">
+            <div class="kpi-row">
+              <div><b>حاشیه سود ناخالص</b><span>سود ناخالص ÷ فروش</span><em>روندش مهمتر از مقدار مطلقش است</em></div>
+              <div><b>گردش موجودی</b><span>COGS ÷ میانگین موجودی</span><em>کالای خوابیده = پول قفل شده</em></div>
+              <div><b>روزهای وصول (DSO)</b><span>مطالبات ÷ میانگین فروش روزانه</span><em>هرچه کوتاهتر، نفس راحتتر</em></div>
+              <div><b>نرخ ضایعات / مغایرت</b><span>کسری شمارش ÷ موجودی</span><em>فصل ۱ دوباره سراغتان می‌آید</em></div>
+            </div>
+          </div>
+          <div class="tab-panel" data-panel="t4c">
+            <ul class="danger-list"><li>قاطی کردن پول شخصی و پول فروشگاه (بزرگترین و رایجترین اشتباه).</li><li>ثبت نکردن فروش نسیه چون «پولش نرسیده»؛ بعداً هم فراموش می‌شود.</li><li>شمارش موجودی به <b>قیمت فروش</b> به جای بهای خرید → سود خیالی.</li><li>ثبت کل خرید ماه به عنوان هزینه، به جای COGS قطعههای فروختهشده.</li><li>تخفیف، مرجوعی و قطعه معیوب را جدا ثبت نکردن.</li><li>شمارش نکردن صندوق و رها کردن مغایرتهای کوچک «فقط ۲۰ تومن».</li><li>نداشتن رسید کتبی برای کالای امانی، وجوه دریافتی و بیعانه.</li></ul>
+          </div>
+          <div class="tab-panel" data-panel="t4d">
+            <ol class="steps-list"><li><b>روز ۱:</b> یک حساب/صندوق جدا برای کسب و کار؛ موجودی نقد اولیه را یادداشت کنید.</li><li><b>روز ۲:</b> دفتر فاکتور شمارهدار و دفتر روزنامه بسازید؛ ستونها: تاریخ، شرح، سند، مبلغ، نقد/نسیه.</li><li><b>روز ۳:</b> فهرست بدهی به تأمینکنندگان و مطالبات از مشتریها را بنویسید، حتی قدیمیها.</li><li><b>روز ۴:</b> شمارش فیزیکی موجودی به بهای خرید؛ مغایرت با دفتر را علامت بزنید.</li><li><b>روز ۵:</b> هزینههای ثابت ماهانه (اجاره، حقوق، برق، اینترنت) را لیست و نقطه سربهسر را حساب کنید.</li><li><b>روز ۶:</b> گزارش ساده سود و زیان هفته را بنویسید؛ حاشیه سود ناخالص را دربیاورید.</li><li><b>روز ۷:</b> تکالیف مالیاتی و صورتحساب الکترونیکی را با حسابدار/مشاور مالیاتی طبق آخرین مقررات مرور کنید.</li></ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="check-block">
+        <h4>✅ چک لیست اجرا · فصل ۴</h4>
+        <ul class="checklist" data-group="m4">
+          <li><label><input type="checkbox" data-check="m4-1"><span>حساب/صندوق شخصی را از فروشگاه جدا کردم.</span></label></li>
+          <li><label><input type="checkbox" data-check="m4-2"><span>فاکتورها و رسیدهای انبار شمارهدار و پشت سر هم شدند.</span></label></li>
+          <li><label><input type="checkbox" data-check="m4-3"><span>گردش صندوق و مغایرتگیری را به عادت آخر روز تبدیل کردم.</span></label></li>
+          <li><label><input type="checkbox" data-check="m4-4"><span>سود ناخالص و نقطه سربهسر ماه را محاسبه کردم.</span></label></li>
+          <li><label><input type="checkbox" data-check="m4-5"><span>لیست مطالبات و بدهیها را بهروز و تاریخدار کردم.</span></label></li>
+        </ul>
+      </div>
+      <div class="quiz-block"><h4>🎯 تمرین فصل ۴</h4><div class="quiz" data-quiz="m4"></div></div>
+    </section>
+
+    <!-- ============================================================
+         برگه تقلب
+    ============================================================= -->
+    <section class="toolkit" id="toolkit" aria-labelledby="toolkitTitle">
+      <div class="section-kicker">ضمیمه · قابل چاپ</div>
+      <h2 class="section-h" id="toolkitTitle">برگه تقلب یک صفحهای</h2>
+      <p class="section-sub">چاپش کنید، بزنید دیوار انبار، یکی هم لابلای دفتر فاکتورها.</p>
+      <div class="cheat-grid">
+        <article><h3>🏗 انبار</h3><ul><li>پرگردش → بین کمر و شانه، نزدیک کانتر</li><li>آدرس: <code>منطقه-راهرو-قفسه-طبقه-خانه</code></li><li>قرنطینه جدا؛ FIFO/FEFO رعایت شود</li><li>هیچ قطعهای بدون آدرس وارد نشود</li><li>5S: جدا · نظم · پاک · استاندارد · انضباط</li></ul></article>
+        <article><h3>🛒 خرده</h3><ul><li>۶ سؤال کشف نیاز، قبل از قیمت</li><li>تطبیق کد فنی ← ارزش ← گارانتی ← قیمت</li><li>سه گزینه بده، نه یک گزینه</li><li>کف قیمت = تمامشده ÷ (۱ − حداقل حاشیه)</li><li>تخفیف فقط در ازای عوض مشخص</li></ul></article>
+        <article><h3>🤝 عمده</h3><ul><li>هدف / کف / BATNA را بنویس</li><li>تخفیف پلکانی و مشروط</li><li>«اگر… آنگاه…» برای هر امتیاز</li><li>قیمت مؤثر = تخفیف + سرمایه + حمل + ریسک مرجوعی</li><li>همهچیز مکتوب، همان جلسه</li></ul></article>
+        <article><h3>📒 حساب</h3><ul><li><b>سود ≠ نقد</b></li><li>سود ناخالص = فروش − COGS</li><li>COGS = اول دوره + خرید − آخر دوره</li><li>سربهسر = هزینه ثابت ÷ حاشیه</li><li>همهچیز سنددار؛ پول شخصی جدا</li></ul></article>
+      </div>
+      <div class="pre-meeting">
+        <h3>🎒 چک لیست ۳۰ ثانیهای، درست قبل از هر مذاکره</h3>
+        <div class="pm-grid">
+          <label><input type="checkbox" data-check="pm-1"><span>کد فنی و آدرس قطعه را دقیق میدانم</span></label>
+          <label><input type="checkbox" data-check="pm-2"><span>موجودی واقعی (نه حدسی) را چک کردم</span></label>
+          <label><input type="checkbox" data-check="pm-3"><span>کف قیمت و سقف تخفیفم مشخص است</span></label>
+          <label><input type="checkbox" data-check="pm-4"><span>میدانم در ازای تخفیف چه میگیرم</span></label>
+          <label><input type="checkbox" data-check="pm-5"><span>زمان تحویل واقعی را می‌توانم قول بدهم</span></label>
+          <label><input type="checkbox" data-check="pm-6"><span>شرایط گارانتی و مرجوعی را شفاف می‌گویم</span></label>
+          <label><input type="checkbox" data-check="pm-7"><span>توافق را مکتوب می‌کنم</span></label>
+          <label><input type="checkbox" data-check="pm-8"><span>اثر این فروش بر نقدینگی فردا را در نظر دارم</span></label>
+        </div>
+      </div>
+      <details class="faq">
+        <summary>واژهنامه کوتاه: اصطلاحاتی که ممکن است سر میز بشنوید</summary>
+        <div class="faq-body">
+          <p><b>ABC / XYZ:</b> دستهبندی کالا بر اساس گردش و نوسان تقاضا. <b>MOQ:</b> حداقل مقدار سفارش. <b>RMA:</b> مجوز و فرآیند برگشت کالا. <b>Fill Rate:</b> درصد سفارشی که از موجودی، بدون کمبود تحویل می‌شود. <b>Lead Time:</b> فاصله سفارش تا تحویل. <b>BATNA:</b> بهترین جایگزین در صورت عدم توافق. <b>ZOPA:</b> محدودهای که دو طرف در آن می‌توانند توافق کنند. <b>Anchor:</b> عدد/پیشنهادی که چارچوب گفتگو را میسازد. <b>FIFO / FEFO:</b> اولین ورودی / نزدیکترین تاریخ انقضا، اول خارج شود. <b>DSO:</b> میانگین روزهای وصول مطالبات.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============================================================
+         پایان
+    ============================================================= -->
+    <section class="final" id="final" aria-labelledby="finalTitle">
+      <div class="final-head">
+        <span class="pill pill-warm">آخر خط، شروع کار واقعی</span>
+        <h2 id="finalTitle">جمع بندی نهایی</h2>
+        <p>چهار فصل، یک زنجیره: <b>انبار منظم</b> → عدد دقیق → <b>مذاکره آرام</b> → شرایط سالم → <b>دفتر تمیز</b> → تصمیم بهتر فردا.</p>
+      </div>
+      <div class="quiz-block big"><h4>🎓 آزمون جامع · ۶ سؤال</h4><div class="quiz" data-quiz="final"></div></div>
+
+      <div class="certificate" id="certificate">
+        <div class="cert-deco" aria-hidden="true">✦</div>
+        <span class="cert-label">گواهی پایان دوره · آریو تجارت</span>
+        <h3>تایید می‌شود که</h3>
+        <input id="certName" type="text" placeholder="نام خود را بنویسید" aria-label="نام شما">
+        <p>چهار فصل «آریو تجارت» را مطالعه و تمرین کرد و آماده است انبار، کانتر، میز مذاکره و دفتر فروشگاه را یک قدم منظمتر کند.</p>
+        <div class="cert-meta"><span id="certDate">—</span><span>آریو تجارت · نسخه آموزشی داخلی</span></div>
+        <div class="cert-lock" id="certLock">برای فعال شدن گواهی، ۸۰٪ چکلیستها و تمرینها را کامل کنید.</div>
+        <button class="btn btn-sm btn-outline" id="certPrint">چاپ گواهی</button>
+      </div>
+
+      <div class="closing-note">
+        <span aria-hidden="true">🌱</span>
+        <p><b>یک پیشنهاد کوچک برای امروز:</b> همین الان یکی از ابزارها را با عدد واقعی فروشگاهتان پر کنید، و یک تیک از چکلیست بزنید. آموزش، وقتی تبدیل به یک کار انجامشده می‌شود، اثر می‌گذارد.</p>
+        <button class="btn btn-sm btn-ghost" id="resetBtn">بازنشانی پیشرفت (با تأیید)</button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div><strong>آریو تجارت</strong><p>یک آموزش داخلی و کاربردی؛ مثالها و نرخها نمونهای و آموزشیاند. تصمیمهای مالی، مالیاتی و حقوقی را حتماً با حسابدار، مشاور مالیاتی یا مشاور حقوقی خودتان نهایی کنید.</p></div>
+      <div class="footer-links"><a href="#top">↑ بالای صفحه</a><a href="#toolkit">برگه تقلب</a><button id="footerSearch">جستجو</button><button id="printBtn2">چاپ / PDF</button></div>
+    </footer>
+  </main>
+</div>
+
+<!-- ============ جستجو ============ -->
+<div class="search-modal" id="searchModal" hidden role="dialog" aria-modal="true" aria-label="جستجو در آموزش">
+  <div class="search-panel">
+    <div class="search-input-wrap">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="search" id="searchInput" placeholder="مثلاً: کف قیمت، آدرس، سود ناخالص، مرجوعی..." autocomplete="off">
+      <kbd>Esc</kbd>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+    <div class="search-foot">
+      <label class="search-opt"><input type="checkbox" id="hideSearchBtn"><span>دیگه دکمه جستجوی بالای صفحه نشون نده <small>(باز هم با <kbd>Ctrl K</kbd> در دسترس است)</small></span></label>
+      <div>با <kbd>Enter</kbd> برو به اولین نتیجه &nbsp;·&nbsp; <kbd>Esc</kbd> بستن</div>
+    </div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+
+<noscript><div class="noscript">بیشتر محتوای آموزشی بدون جاوااسکریپت هم خواندنی است؛ ابزارهای محاسبه، آزمونها و ذخیره پیشرفت به جاوااسکریپت نیاز دارند.</div></noscript>
+
+<script src="script.js"></script>
+</body>
+</html>

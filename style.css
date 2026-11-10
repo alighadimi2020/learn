@@ -1,137 +1,147 @@
-@font-face{font-family:Peyda;font-weight:300;font-display:swap;src:url(fonts/peyda-light.ttf) format("truetype")}
-@font-face{font-family:Peyda;font-weight:400;font-display:swap;src:url(fonts/peyda-regular.ttf) format("truetype")}
-@font-face{font-family:Peyda;font-weight:500;font-display:swap;src:url(fonts/peyda-medium.ttf) format("truetype")}
-@font-face{font-family:Peyda;font-weight:600;font-display:swap;src:url(fonts/peyda-semibold.ttf) format("truetype")}
-@font-face{font-family:Peyda;font-weight:700;font-display:swap;src:url(fonts/peyda-bold.ttf) format("truetype")}
-@font-face{font-family:Peyda;font-weight:800;font-display:swap;src:url(fonts/peyda-extrabold.ttf) format("truetype")}
-:root{--e950:#031a14;--e900:#062d22;--e800:#0a4332;--e700:#0e5c45;--e500:#17936b;--mint:#e3f4ec;--ivory:#f6f4ee;--paper:#fff;--gold:#c9ae6c;--gold2:#e6d3a0;--ink:#12261f;--mute:#5b6f67;--line:#dfe6e1;--bad:#c0392b;--r:20px;--sh:0 18px 40px -18px rgba(3,26,20,.35)}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--ivory);color:var(--ink);font-family:Peyda,Vazirmatn,Tahoma,sans-serif;font-size:17px;line-height:2.05}
-button{font-family:inherit}
-/* خانه */
-#home{min-height:100vh;background:radial-gradient(900px 500px at 85% -10%,rgba(23,147,107,.45),transparent 60%),radial-gradient(700px 500px at 0% 110%,rgba(201,174,108,.18),transparent 60%),linear-gradient(160deg,var(--e950),var(--e800));padding:56px 20px 80px;position:relative;overflow:hidden}
-#home::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:46px 46px;mask-image:radial-gradient(circle at 50% 30%,#000,transparent 75%)}
-.hero,.roles{position:relative;max-width:980px;margin:0 auto}
-.badge{display:inline-block;color:var(--gold2);border:1px solid rgba(201,174,108,.5);padding:2px 18px;border-radius:99px;font-size:14px;letter-spacing:.3px}
-.hero h1{color:#fff;font-size:clamp(32px,6vw,54px);line-height:1.5;margin:18px 0 10px;font-weight:700}
-.hero p{color:#b9d3c8;max-width:620px;margin:0 0 44px;font-size:18px}
-.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px}
-.role{position:relative;text-align:start;color:#fff;border:1px solid rgba(230,211,160,.28);border-radius:26px;padding:28px 26px 24px;cursor:pointer;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.02));backdrop-filter:blur(8px);transition:transform .3s,border-color .3s,box-shadow .3s}
-.role:hover,.role:focus-visible{transform:translateY(-8px);border-color:var(--gold);box-shadow:0 24px 50px -20px #000;outline:none}
-.role .ico{display:grid;place-items:center;width:68px;height:68px;border-radius:20px;font-size:32px;background:linear-gradient(145deg,var(--gold2),var(--gold));box-shadow:0 10px 24px -10px var(--gold);margin-bottom:18px}
-.role b{display:block;font-size:24px;margin-bottom:4px}
-.role small{display:block;color:#a9c7bb;line-height:1.9;min-height:56px}
-.role .go{display:inline-block;margin-top:14px;color:var(--gold2);font-weight:500}
-/* دوره */
-.chead{background:linear-gradient(160deg,var(--e950),var(--e800));padding:26px 20px 70px;color:#fff;text-align:start}
-.chead>*{max-width:1120px;margin-inline:auto;display:block}
-.chead h2{font-size:clamp(26px,4vw,38px);margin:6px auto 0}
-.back{background:none;border:0;color:var(--gold2);cursor:pointer;font-size:15px;padding:0}
-.layout{max-width:1120px;margin:-44px auto 0;padding:0 16px 80px;display:grid;grid-template-columns:290px 1fr;gap:26px;align-items:start}
-.side{position:sticky;top:16px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:var(--sh);text-align:center}
-.ring{--p:0;width:112px;height:112px;margin:0 auto 8px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--e500) calc(var(--p)*1%),var(--mint) 0);transition:background .6s}
-.ring b{width:86px;height:86px;border-radius:50%;background:var(--paper);display:grid;place-items:center;font-size:22px;color:var(--e700)}
-#status{color:var(--mute);font-size:14px;margin-bottom:12px}
-#toc{text-align:start;margin-bottom:14px}
-#toc a{display:flex;gap:10px;align-items:center;color:var(--ink);text-decoration:none;font-size:14px;line-height:1.7;padding:7px 8px;border-radius:10px}
-#toc a:hover{background:var(--mint)}
-#toc a i{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-size:11px;font-style:normal;color:transparent;transition:.3s}
-#toc a.read i{background:var(--e500);border-color:var(--e500);color:#fff}
-.examMsg{font-size:13px;color:var(--mute);line-height:1.8;margin:10px 0 0}
-.btn{width:100%;background:linear-gradient(145deg,var(--e500),var(--e700));color:#fff;border:0;border-radius:14px;padding:12px 24px;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 12px 24px -12px var(--e700);transition:transform .2s,filter .2s}
-.btn:hover:not(:disabled){transform:translateY(-2px);filter:brightness(1.08)}
-.btn:disabled{background:var(--line);color:#8a9a93;box-shadow:none;cursor:not-allowed}
-.sec{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:26px 30px 14px;margin-bottom:22px;box-shadow:var(--sh);position:relative;overflow:hidden;scroll-margin-top:16px;transition:border-color .5s}
-.sec::before{content:"";position:absolute;inset-block:0;inset-inline-start:0;width:6px;background:linear-gradient(var(--gold),var(--gold2));transition:background .5s}
-.sec.read::before{background:linear-gradient(var(--e500),var(--e700))}
-.sec h3{display:flex;align-items:center;gap:12px;margin:0 0 6px;font-size:22px;color:var(--e800)}
-.sec h3 em{font-style:normal;flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:17px;background:var(--mint);color:var(--e700)}
-.sec p{margin:.5em 0}
-.sec ul{padding-inline-start:22px}
-.sec li::marker{color:var(--gold)}
-.key,.case{border-radius:16px;padding:12px 18px;margin:14px 0}
-.key{background:linear-gradient(135deg,var(--e900),var(--e700));color:#fff}
-.key::before{content:"نکته‌ی کلیدی";display:block;color:var(--gold2);font-weight:700;font-size:14px}
-.case{background:#fbf7ea;border:1px dashed var(--gold)}
-.case::before{content:"نمونه‌ی عملی";display:block;color:#8d7233;font-weight:700;font-size:14px}
-#books h3.bt{font-size:24px;color:var(--e800);margin:34px 0 4px}
-#books>p{color:var(--mute);margin:0 0 14px}
-.bgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.book{background:linear-gradient(170deg,var(--e900),var(--e800));color:#fff;border-radius:18px;padding:20px;border-top:4px solid var(--gold);box-shadow:var(--sh)}
-.book b{display:block;font-size:18px;line-height:1.6}
-.book span{color:var(--gold2);font-size:13px;direction:ltr;display:block;text-align:start}
-.book p{margin:8px 0 0;font-size:14px;color:#cfe3da;line-height:1.9}
-/* آزمون */
-.overlay{position:fixed;inset:0;background:rgba(3,26,20,.82);backdrop-filter:blur(6px);display:grid;place-items:center;z-index:50;padding:14px;overflow:auto}
-.overlay[hidden]{display:none}
-.modal{background:var(--ivory);width:100%;max-width:660px;border-radius:28px;padding:0;overflow:hidden;animation:pop .35s;border:1px solid var(--gold)}
-.modal>*{margin-inline:26px}
-@keyframes pop{from{transform:translateY(20px) scale(.96);opacity:0}}
-.qhead{display:flex;justify-content:space-between;background:var(--e900);color:var(--gold2);margin:0!important;padding:14px 26px;font-size:15px}
-.qprog{height:5px;background:var(--mint);margin:0!important}
-.qprog i{display:block;height:100%;width:0;background:var(--gold);transition:width .5s}
-#qText{font-size:19px;line-height:2;margin-top:22px;margin-bottom:10px;color:var(--e900)}
-.opt{display:flex;gap:12px;width:calc(100% - 52px);text-align:start;background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:10px 16px;margin:10px 26px;font-size:16px;color:inherit;cursor:pointer;line-height:1.9;transition:.2s}
-.opt b{flex:none;width:30px;height:30px;border-radius:9px;background:var(--mint);color:var(--e700);display:grid;place-items:center;font-size:14px}
-.opt:hover:not(:disabled){border-color:var(--e500);transform:translateX(-4px)}
-.opt.right{background:var(--e700);border-color:var(--e700);color:#fff}
-.opt.right b{background:var(--gold);color:var(--e950)}
-.opt.wrong{background:#fbe9e6;border-color:var(--bad);color:var(--bad);animation:shake .4s}
-.opt.wrong b{background:var(--bad);color:#fff}
-.opt:disabled:not(.right):not(.wrong){opacity:.55}
-@keyframes shake{25%{transform:translateX(10px)}75%{transform:translateX(-10px)}}
-.feedback{padding:12px 18px;border-radius:16px;margin-top:12px!important;margin-bottom:12px!important;animation:pop .3s;font-size:15px;line-height:2}
-.feedback.ok{background:var(--mint);border:1px solid var(--e500);color:var(--e900)}
-.feedback.no{background:#fdf1ee;border:1px solid var(--bad)}
-.feedback small{display:block;color:var(--mute);margin-top:4px}
-#qNext{width:calc(100% - 52px);margin-bottom:22px}
-#qResult{text-align:center;padding:30px 0 10px}
-#qResult .big{font-size:64px;line-height:1.3}
-#qResult .btn{width:auto;margin-top:6px}
-.link{display:block;background:none;border:0;color:var(--mute);cursor:pointer;margin:4px auto 18px}
-#fx{position:fixed;inset:0;pointer-events:none;z-index:99;overflow:hidden}
-.conf{position:absolute;top:-20px;width:10px;height:14px;animation:fall linear forwards}
-@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
-@media(max-width:860px){
- .layout{grid-template-columns:1fr}
- .side{position:static;display:grid;grid-template-columns:auto 1fr;gap:6px 16px;align-items:center;text-align:start}
- .ring{width:84px;height:84px;margin:0;grid-row:span 2}.ring b{width:62px;height:62px;font-size:17px}
- #toc,.examMsg{grid-column:1/-1}
- #toc{display:none}
- .sec{padding:22px 20px 10px}
-}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* ==========================================================================
+   آزمون شایستگی‌های عمومی کارکنان
+   ========================================================================== */
 
-.role ul{list-style:none;margin:14px 0 0;padding:0}
-.role li{position:relative;padding-inline-start:20px;color:#b9d3c8;font-size:16px;line-height:2.1}
-.role li::before{content:"";position:absolute;inset-inline-start:0;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:var(--gold)}
-.role b{font-size:26px;padding-bottom:10px;border-bottom:1px solid rgba(230,211,160,.3)}
-.hero p,.badge{display:none}
-.hero h1{margin:0 0 30px}
-.exam-end{display:none;background:linear-gradient(160deg,var(--e950),var(--e800));color:#fff;border:1px solid var(--gold);border-radius:var(--r);padding:22px;text-align:center;margin-top:26px}
-.exam-end h3{margin:0 0 4px;color:var(--gold2)}
-.exam-end .examMsg{color:#b9d3c8}
-@media(max-width:860px){
- .side .startQuiz,.side .examMsg{display:none}
- .exam-end{display:block}
- .chead{padding:20px 16px 56px}
- .layout{padding:0 12px 50px;margin-top:-36px;gap:16px}
+/* ---------- فونت ---------- */
+@font-face{font-family:"Peyda";font-weight:100;font-style:normal;font-display:swap;src:url("fonts/peyda-thin.ttf") format("truetype")}
+@font-face{font-family:"Peyda";font-weight:300;font-style:normal;font-display:swap;src:url("fonts/peyda-light.ttf") format("truetype")}
+@font-face{font-family:"Peyda";font-weight:400;font-style:normal;font-display:swap;src:url("fonts/peyda-regular.ttf") format("truetype")}
+@font-face{font-family:"Peyda";font-weight:500;font-style:normal;font-display:swap;src:url("fonts/peyda-medium.ttf") format("truetype")}
+@font-face{font-family:"Peyda";font-weight:600;font-style:normal;font-display:swap;src:url("fonts/peyda-semibold.ttf") format("truetype")}
+@font-face{font-family:"Peyda";font-weight:700;font-style:normal;font-display:swap;src:url("fonts/peyda-bold.ttf") format("truetype")}
+@font-face{font-family:"Peyda";font-weight:800;font-style:normal;font-display:swap;src:url("fonts/peyda-extrabold.ttf") format("truetype")}
+
+/* ---------- متغیرها ---------- */
+:root{
+  --font:"Peyda",Tahoma,"Segoe UI",sans-serif;
+
+  --ink:#172235;
+  --muted:#64748b;
+  --line:#e2e8f0;
+  --bg:#f3f6fb;
+  --surface:#fff;
+  --surface-2:#f8fafc;
+
+  --brand:#174ea6;
+  --blue:#2563eb;
+  --soft:#eff6ff;
+  --green:#15803d;
+  --red:#b91c1c;
+
+  --radius-sm:10px;
+  --radius:13px;
+  --radius-lg:19px;
+  --shadow:0 12px 32px rgb(15 23 42 / .05);
+  --focus:0 0 0 3px rgb(37 99 235 / .35);
 }
-@media(max-width:520px){
- body{font-size:16px}
- #home{padding:36px 14px 50px}
- .roles{gap:16px}
- .role{padding:22px 20px}
- .sec{padding:18px 16px 8px;border-radius:16px}
- .sec h3{font-size:19px;gap:10px}
- .sec h3 em{width:34px;height:34px;font-size:15px}
- .bgrid{grid-template-columns:1fr}
- .overlay{padding:0;align-items:end}
- .modal{border-radius:24px 24px 0 0;max-height:94vh;overflow:auto}
- .modal>*{margin-inline:16px}
- .qhead{padding:12px 16px}
- .opt{width:calc(100% - 32px);margin:8px 16px;padding:9px 12px;font-size:15px}
- #qNext{width:calc(100% - 32px)}
- #qText{font-size:17px}
+
+/* ---------- پایه ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-weight:400;line-height:1.85}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+h1,h2,h3{font-weight:800;line-height:1.5}
+:focus-visible{outline:none;box-shadow:var(--focus)}
+[tabindex="-1"]:focus{outline:none}
+[hidden],.hidden{display:none!important}
+
+/* ---------- چیدمان ---------- */
+.shell{max-width:920px;margin:auto;padding:22px 15px 44px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}
+.brand,.muted{color:var(--muted);font-size:12px}
+.tag,.pill{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:5px 12px;font-size:12px;color:var(--muted)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:clamp(19px,4vw,34px);box-shadow:var(--shadow)}
+.footer{text-align:center;color:var(--muted);font-size:11px;margin-top:16px}
+
+/* ---------- تایپوگرافی ---------- */
+h1{font-size:clamp(23px,4vw,33px);margin:0 0 6px}
+h2{font-size:21px;margin:0 0 9px}
+.lead{color:var(--muted);margin:0 0 22px}
+.section-title{font-size:17px}
+.section-title.spaced{font-size:18px;margin-top:25px}
+.result-title{margin-top:12px}
+
+/* ---------- آمار ---------- */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:18px 0}
+.stat,.levelbox{border:1px solid var(--line);border-radius:12px;background:var(--surface-2);padding:11px;text-align:center}
+.stat strong{display:block;color:var(--brand);font-size:21px;font-weight:800}
+.stat span,.levelbox small{font-size:11px;color:var(--muted)}
+
+/* ---------- فرم ---------- */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.field label{display:block;font-size:13px;font-weight:700;margin-bottom:5px}
+.field input,.field select{width:100%;border:1px solid #cbd5e1;border-radius:var(--radius-sm);padding:11px;background:var(--surface)}
+.field input:focus,.field select:focus{border-color:var(--blue)}
+.field .invalid{border-color:var(--red)}
+.form-error{margin:12px 0 0;color:var(--red);font-size:13px;font-weight:600}
+
+.rules{margin:20px 0;padding:15px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface-2)}
+.rules ul{margin:6px 0 0;padding-right:20px;font-size:13px;color:#475569}
+
+/* ---------- دکمه‌ها ---------- */
+.btn{border:0;border-radius:11px;padding:11px 20px;background:var(--brand);color:#fff;font-weight:700;transition:background-color .15s}
+.btn:hover:not(:disabled){background:#123f86}
+.btn.secondary{background:#eaf1fb;color:var(--brand)}
+.btn.secondary:hover:not(:disabled){background:#dbe8f9}
+.btn:disabled{opacity:.45;cursor:default}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
+
+/* ---------- آزمون ---------- */
+.examhead{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.pill{background:var(--soft);color:var(--brand);border:0;font-weight:700}
+
+.timer{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.ring{--p:100%;--ring:var(--blue);width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(closest-side,var(--surface) 80%,transparent 82%),conic-gradient(var(--ring) var(--p),#dbeafe 0);
+  color:var(--brand);font-weight:800;font-size:16px}
+.urgent .ring{--ring:var(--red);color:var(--red)}
+
+.progressmeta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin:13px 0 6px}
+.track{height:7px;border-radius:9px;background:#e8eef7;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,#174ea6,#60a5fa);transition:width .3s ease}
+
+.question{font-size:clamp(18px,2.7vw,22px);font-weight:700;margin:24px 0 17px;line-height:1.9}
+.options{display:grid;gap:9px}
+.option{width:100%;display:flex;align-items:flex-start;gap:11px;text-align:right;padding:12px;border:1.5px solid var(--line);border-radius:var(--radius);background:var(--surface);transition:border-color .15s,background-color .15s}
+.option:hover:not(:disabled){border-color:#93c5fd;background:#f8fbff}
+.option.selected{border-color:var(--blue);background:var(--soft)}
+.option:disabled{cursor:default}
+.letter{width:27px;height:27px;flex:0 0 27px;display:grid;place-items:center;background:#f1f5f9;border-radius:8px;font-weight:700}
+.selected .letter{background:var(--brand);color:#fff}
+.foot{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:12px;margin-top:17px}
+
+/* ---------- نتیجه ---------- */
+.score{font-size:45px;font-weight:800;color:var(--brand);line-height:1.4}
+.levelgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:17px 0}
+.levelbox strong{display:block;font-size:18px;font-weight:700}
+
+.result{border:1px solid var(--line);border-radius:var(--radius);padding:13px;margin-top:11px}
+.result h3{font-size:14px;margin:0 0 7px}
+.answer{font-size:12px;margin:5px 0}
+.good{color:var(--green);font-weight:700}
+.bad{color:var(--red);font-weight:700}
+.why{background:var(--surface-2);padding:9px;border-radius:8px;font-size:12px;color:#475569;margin-top:7px}
+.notice{border-top:1px solid var(--line);padding-top:13px;margin-top:20px;color:var(--muted);font-size:12px}
+
+/* ---------- واکنش‌گرا ---------- */
+@media (max-width:620px){
+  .shell{padding:12px 9px 30px}
+  .grid{grid-template-columns:1fr}
+  .levelgrid{grid-template-columns:repeat(2,1fr)}
+  .foot{flex-direction:column}
+}
+
+/* ---------- کاهش حرکت ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;scroll-behavior:auto!important}
+}
+
+/* ---------- چاپ ---------- */
+@media print{
+  body{background:#fff}
+  .shell{padding:0}
+  .top,.actions,.no-print,.footer{display:none!important}
+  .panel{box-shadow:none;border:0;padding:0}
+  .result{break-inside:avoid}
 }

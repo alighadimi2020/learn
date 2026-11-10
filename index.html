@@ -1,49 +1,133 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>آموزش و آزمون کارکنان فروشگاه لوازم یدکی</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="آزمون شایستگی‌های عمومی کارکنان: رفتار حرفه‌ای، تعامل سازمانی، ارتباط با مشتری و مهارت کاربردی Excel">
+  <title>ارزیابی شایستگی‌های عمومی کارکنان</title>
+
+  <link rel="preload" href="fonts/peyda-regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="fonts/peyda-bold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
+<main class="shell">
 
-<main id="home">
-  <div class="hero">
-    <h1>آموزش کارکنان</h1>
-  </div>
-  <div class="roles" id="roles"></div>
-</main>
+  <header class="top">
+    <div class="brand">مرکز ارزیابی و توسعه منابع انسانی</div>
+    <div class="tag">آزمون مشترک تمام واحدها</div>
+  </header>
 
-<div id="course" hidden>
-  <header class="chead"><button class="back" id="backBtn">‹ بازگشت به انتخاب سمت</button><h2 id="courseTitle"></h2></header>
-  <div class="layout">
-    <aside class="side">
-      <div class="ring" id="ring"><b id="ringTxt"></b></div>
-      <div id="status"></div>
-      <nav id="toc"></nav>
-      <button class="btn startQuiz" disabled>شروع آزمون</button>
-      <p class="examMsg"></p>
-    </aside>
-    <div class="content"><div id="sections"></div><div id="books"></div>
-      <section class="exam-end"><h3>آزمون پایان دوره</h3><p class="examMsg"></p><button class="btn startQuiz" disabled>شروع آزمون</button></section>
+  <!-- صفحه شروع -->
+  <section id="intro" class="panel" aria-labelledby="introTitle">
+    <h1 id="introTitle" tabindex="-1">آزمون شایستگی‌های عمومی کارکنان</h1>
+    <p class="lead">رفتار حرفه‌ای، تعامل سازمانی، ارتباط با مشتری و مهارت کاربردی Excel</p>
+
+    <div class="stats">
+      <div class="stat"><strong>۱۵</strong><span>سؤال چهارگزینه‌ای</span></div>
+      <div class="stat"><strong>۲۰ ثانیه</strong><span>زمان هر سؤال</span></div>
+      <div class="stat"><strong>۳۰۰ ثانیه</strong><span>زمان کل آزمون</span></div>
     </div>
-  </div>
-</div>
 
-<div id="quiz" class="overlay" hidden>
-  <div class="modal">
-    <div class="qhead"><span id="qCount"></span><span id="qScore"></span></div>
-    <div class="qprog"><i id="qProgFill"></i></div>
-    <h3 id="qText"></h3>
-    <div id="qOpts"></div>
-    <div id="qFeedback" class="feedback" hidden></div>
-    <button class="btn" id="qNext" hidden>سؤال بعدی</button>
-    <div id="qResult" hidden></div>
-    <button class="link" id="qClose">بستن</button>
-  </div>
-</div>
-<div id="fx"></div>
-<script src="script.js"></script>
+    <form id="startForm" novalidate>
+      <div class="grid">
+        <div class="field">
+          <label for="person">نام و نام خانوادگی</label>
+          <input id="person" name="person" maxlength="70" placeholder="نام شرکت‌کننده" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="department">واحد سازمانی</label>
+          <select id="department" name="department" required>
+            <option value="">انتخاب واحد</option>
+            <option>حسابداری</option>
+            <option>فروش کانتر</option>
+            <option>انبار</option>
+            <option>سایر</option>
+          </select>
+        </div>
+      </div>
+      <p id="formError" class="form-error" role="alert" hidden></p>
+
+      <div class="rules">
+        <b>دستورالعمل</b>
+        <ul>
+          <li>سؤالات به‌صورت تک‌به‌تک نمایش داده می‌شوند.</li>
+          <li>هر سؤال ۲۰ ثانیه فرصت دارد؛ پس از پایان زمان، به سؤال بعدی می‌روید.</li>
+          <li>پس از انتخاب پاسخ، امکان تغییر آن وجود ندارد.</li>
+          <li>سؤال بی‌پاسخ امتیاز ندارد؛ نمره منفی نیز اعمال نمی‌شود.</li>
+          <li>پاسخ‌نامه و توضیحات پس از پایان آزمون نمایش داده می‌شوند.</li>
+          <li>در سؤال‌های رفتاری، پاسخ برتر نشان‌دهنده قضاوت موقعیتی مطلوب است، نه تشخیص شخصیت.</li>
+        </ul>
+      </div>
+
+      <div class="actions"><button type="submit" class="btn" id="startBtn">شروع آزمون</button></div>
+    </form>
+    <p class="muted">برای مقایسه منصفانه، آزمون را در شرایط یکسان و بدون کمک دیگران اجرا کنید.</p>
+  </section>
+
+  <!-- صفحه آزمون -->
+  <section id="exam" class="panel hidden" aria-label="آزمون">
+    <div class="examhead">
+      <div>
+        <div class="pill" id="cat"></div>
+        <div class="muted" id="personline"></div>
+      </div>
+      <div class="timer" id="timerbox">
+        <div class="ring" id="timer" role="timer" aria-label="زمان باقی‌مانده">۲۰</div>
+        <span>ثانیه باقی‌مانده</span>
+      </div>
+    </div>
+
+    <div class="progressmeta">
+      <span id="progress">سؤال ۱ از ۱۵</span>
+      <span id="answered">پاسخ داده‌شده: ۰</span>
+    </div>
+    <div class="track" role="progressbar" aria-label="پیشرفت آزمون" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="track">
+      <div class="fill" id="fill"></div>
+    </div>
+
+    <h2 class="question" id="question"></h2>
+    <div class="options" id="options" role="group" aria-labelledby="question"></div>
+
+    <div class="foot" aria-live="polite">
+      <span id="status">یک گزینه انتخاب کنید.</span>
+      <span>با انتخاب گزینه، سؤال بعدی نمایش داده می‌شود.</span>
+    </div>
+    <div class="actions"><button type="button" class="btn secondary" id="skipBtn">بدون پاسخ / سؤال بعد</button></div>
+  </section>
+
+  <!-- صفحه نتیجه -->
+  <section id="results" class="panel hidden" aria-labelledby="resultTitle">
+    <div class="pill">گزارش ارزیابی</div>
+    <h2 id="resultTitle" class="result-title" tabindex="-1">آزمون پایان یافت</h2>
+    <p id="who" class="lead"></p>
+    <div class="score" id="score"></div>
+    <p id="grade" class="lead"></p>
+
+    <h2 class="section-title">نتیجه حوزه‌های ارزیابی</h2>
+    <div id="categoryResults" class="levelgrid"></div>
+
+    <div class="stats">
+      <div class="stat"><strong id="correct"></strong><span>پاسخ صحیح</span></div>
+      <div class="stat"><strong id="wrong"></strong><span>پاسخ نادرست</span></div>
+      <div class="stat"><strong id="blank"></strong><span>بی‌پاسخ</span></div>
+    </div>
+
+    <h2 class="section-title spaced">تحلیل پاسخ‌ها</h2>
+    <div id="review"></div>
+
+    <div class="notice">
+      <b>محدودیت اعتبار:</b> این ابزار یک آزمون کوتاه شایستگی عمومی و قضاوت موقعیتی است، نه آزمون تشخیصی شخصیت یا سلامت روان. نتایج رفتاری، برداشت از تصمیم فرد در موقعیت‌های فرضی را نشان می‌دهد و برای نتیجه‌گیری قطعی درباره ویژگی‌های پایدار شخصیت کافی نیست. برای ارزیابی روان‌شناختی معتبر، ابزار استاندارد و هنجاریابی‌شده با نظارت متخصص لازم است. نمره Excel نیز فقط مهارت‌های مشخص‌شده در همین سه سؤال را می‌سنجد. از این گزارش به‌تنهایی برای تصمیم استخدامی یا انضباطی استفاده نشود.
+    </div>
+    <div class="actions no-print">
+      <button type="button" class="btn" id="printBtn">چاپ گزارش</button>
+      <button type="button" class="btn secondary" id="restartBtn">آزمون مجدد</button>
+    </div>
+  </section>
+
+  <footer class="footer">آزمون شایستگی‌های عمومی | نسخه مستقل آفلاین</footer>
+</main>
 </body>
 </html>
